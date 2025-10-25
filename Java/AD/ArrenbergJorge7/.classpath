@@ -48,25 +48,5 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="c:/Users/dam2/.m2/repository/com/mysql/mysql-connector-j/9.4.0/mysql-connector-j-9.4.0.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/C:/Users/dam2/.m2/repository/com/mysql/mysql-connector-j/9.4.0/mysql-connector-j-9.4.0-javadoc.jar!/"/>
-			<attribute name="maven.artifactId" value="mysql-connector-j"/>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="maven.scope" value="compile"/>
-			<attribute name="maven.version" value="9.4.0"/>
-			<attribute name="maven.groupId" value="com.mysql"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="c:/Users/dam2/.m2/repository/com/google/protobuf/protobuf-java/4.31.1/protobuf-java-4.31.1.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/C:/Users/dam2/.m2/repository/com/google/protobuf/protobuf-java/4.31.1/protobuf-java-4.31.1-javadoc.jar!/"/>
-			<attribute name="maven.artifactId" value="protobuf-java"/>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="maven.scope" value="compile"/>
-			<attribute name="maven.version" value="4.31.1"/>
-			<attribute name="maven.groupId" value="com.google.protobuf"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

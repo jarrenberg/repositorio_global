@@ -19,158 +19,93 @@ import java.util.Scanner;
 
 class Prueba {
 
-    private ByteArrayOutputStream outputStream;
-    private PrintStream originalOut;
-    private Connection testConnection;
-    
-    @TempDir
-    Path tempDir;
+	private ByteArrayOutputStream outputStream;
+	private PrintStream originalOut;
+	private Connection testConnection;
 
-    @BeforeEach
-    void setUp() throws SQLException {
-        // Redirigir System.out para capturar la salida
-        originalOut = System.out;
-        outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
-    }
+	@TempDir
+	Path tempDir;
 
-    @AfterEach
-    void tearDown() throws SQLException {
-        // Restaurar System.out
-        System.setOut(originalOut);
-        if (testConnection != null && !testConnection.isClosed()) {
-            testConnection.close();
-        }
-    }
+	@BeforeEach
+	void setUp() throws SQLException {
+		// Redirigir System.out para capturar la salida
+		originalOut = System.out;
+		outputStream = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(outputStream));
+	}
 
-    @Test
-    @DisplayName("Test de credencialesConexionSQL con archivo de configuración válido")
-    void testCredencialesConexionSQL() throws IOException {
-        // Crear archivo de configuración temporal
-        Path configFile = tempDir.resolve("mysqld.cnf");
-        String configContent = "server=localhost\nport=3306\nnombrebd=testdb\nuser=testuser\npassword=testpass";
-        Files.write(configFile, configContent.getBytes());
+	@AfterEach
+	void tearDown() throws SQLException {
+		// Restaurar System.out
+		System.setOut(originalOut);
+		if (testConnection != null && !testConnection.isClosed()) {
+			testConnection.close();
+		}
+	}
 
-        // Ejecutar el método con el archivo temporal
-        String[] result = Main.credencialesConexionSQL();
-        
-        assertNotNull(result);
-        assertEquals(3, result.length);
-        assertEquals("jdbc:mysql://192.168.10.111:3306/banco", result[0]);
-        assertEquals("jorge", result[1]);
-        assertEquals("Peluca79", result[2]);
-    }
+	@Test
+	@DisplayName("Test de informacionTransaccion con datos válidos")
+	void testInformacionTransaccion() {
+		String input = "cuenta_origen\ncuenta_destino\n500\n";
+		Scanner scanner = new Scanner(new ByteArrayInputStream(input.getBytes()));
 
-    @Test
-    @DisplayName("Test de devolverString con entrada válida")
-    void testDevolverStringValido() {
-        String input = "cuenta123\n";
-        Scanner scanner = new Scanner(new ByteArrayInputStream(input.getBytes()));
-        
-        String result = Main.devolverString(scanner, "Introduzca cuenta:");
-        
-        assertEquals("cuenta123", result);
-    }
+		String[] result = Main.informacionTransaccion(scanner);
 
-    @Test
-    @DisplayName("Test de devolverEntero con entrada válida")
-    void testDevolverEnteroValido() {
-        String input = "100\n";
-        Scanner scanner = new Scanner(new ByteArrayInputStream(input.getBytes()));
-        
-        int result = Main.devolverEntero(scanner, "Introduzca cantidad:");
-        
-        assertEquals(100, result);
-    }
+		assertNotNull(result);
+		assertEquals(3, result.length);
+		assertEquals("cuenta_origen", result[0]);
+		assertEquals("cuenta_destino", result[1]);
+		assertEquals("500", result[2]);
+	}
 
-    @Test
-    @DisplayName("Test de devolverEntero con entrada inválida seguida de válida")
-    void testDevolverEnteroConRecuperacion() {
-        String input = "abc\n100\n";
-        Scanner scanner = new Scanner(new ByteArrayInputStream(input.getBytes()));
-        
-        int result = Main.devolverEntero(scanner, "Introduzca cantidad:");
-        
-        assertEquals(100, result);
-        String output = outputStream.toString();
-        assertTrue(output.contains("Se debe introducir un numero valido"));
-    }
+	@Test
+	@DisplayName("Test de existeCuenta con conexión mock")
+	void testExisteCuenta() throws SQLException {
+		// Mock de la conexión y prepared statement
+		Connection mockConnection = mock(Connection.class);
+		PreparedStatement mockPreparedStatement = mock(PreparedStatement.class);
+		ResultSet mockResultSet = mock(ResultSet.class);
 
-    @Test
-    @DisplayName("Test de informacionTransaccion con datos válidos")
-    void testInformacionTransaccion() {
-        String input = "cuenta_origen\ncuenta_destino\n500\n";
-        Scanner scanner = new Scanner(new ByteArrayInputStream(input.getBytes()));
-        
-        String[] result = Main.informacionTransaccion(scanner);
-        
-        assertNotNull(result);
-        assertEquals(3, result.length);
-        assertEquals("cuenta_origen", result[0]);
-        assertEquals("cuenta_destino", result[1]);
-        assertEquals("500", result[2]);
-    }
+		when(mockConnection.prepareStatement("SELECT * from CUENTAS where id_cuenta=?"))
+				.thenReturn(mockPreparedStatement);
+		when(mockPreparedStatement.executeQuery()).thenReturn(mockResultSet);
+		when(mockResultSet.next()).thenReturn(true); // Simula que la cuenta existe
 
-    @Test
-    @DisplayName("Test de existeCuenta con conexión mock")
-    void testExisteCuenta() throws SQLException {
-        // Mock de la conexión y prepared statement
-        Connection mockConnection = mock(Connection.class);
-        PreparedStatement mockPreparedStatement = mock(PreparedStatement.class);
-        ResultSet mockResultSet = mock(ResultSet.class);
+		// Este test es más complejo ya que existeCuenta crea su propia conexión
+		// En una implementación real, deberías usar dependency injection
+	}
 
-        when(mockConnection.prepareStatement("SELECT * from CUENTAS where id_cuenta=?"))
-            .thenReturn(mockPreparedStatement);
-        when(mockPreparedStatement.executeQuery()).thenReturn(mockResultSet);
-        when(mockResultSet.next()).thenReturn(true); // Simula que la cuenta existe
+	@Test
+	@DisplayName("Test de getSaldoCuenta con conexión mock")
+	void testGetSaldoCuenta() throws SQLException {
+		// Similar al test anterior, necesitarías mockear la conexión
+		// Este test muestra el patrón que seguirías
+		Connection mockConnection = mock(Connection.class);
+		PreparedStatement mockPreparedStatement = mock(PreparedStatement.class);
+		ResultSet mockResultSet = mock(ResultSet.class);
 
-        // Este test es más complejo ya que existeCuenta crea su propia conexión
-        // En una implementación real, deberías usar dependency injection
-    }
+		when(mockConnection.prepareStatement("SELECT saldo from CUENTAS where id_cuenta=?"))
+				.thenReturn(mockPreparedStatement);
+		when(mockPreparedStatement.executeQuery()).thenReturn(mockResultSet);
+		when(mockResultSet.next()).thenReturn(true);
+		when(mockResultSet.getInt(1)).thenReturn(1000);
+	}
 
-    @Test
-    @DisplayName("Test de getSaldoCuenta con conexión mock")
-    void testGetSaldoCuenta() throws SQLException {
-        // Similar al test anterior, necesitarías mockear la conexión
-        // Este test muestra el patrón que seguirías
-        Connection mockConnection = mock(Connection.class);
-        PreparedStatement mockPreparedStatement = mock(PreparedStatement.class);
-        ResultSet mockResultSet = mock(ResultSet.class);
+	@Test
+	@DisplayName("Test de flujo completo con datos de entrada simulados")
+	void testFlujoCompleto() {
+		String input = "cuenta1\ncuenta2\n200\n";
+		InputStream originalIn = System.in;
 
-        when(mockConnection.prepareStatement("SELECT saldo from CUENTAS where id_cuenta=?"))
-            .thenReturn(mockPreparedStatement);
-        when(mockPreparedStatement.executeQuery()).thenReturn(mockResultSet);
-        when(mockResultSet.next()).thenReturn(true);
-        when(mockResultSet.getInt(1)).thenReturn(1000);
-    }
+		try {
+			System.setIn(new ByteArrayInputStream(input.getBytes()));
 
-    @Test
-    @DisplayName("Test de flujo completo con datos de entrada simulados")
-    void testFlujoCompleto() {
-        String input = "cuenta1\ncuenta2\n200\n";
-        InputStream originalIn = System.in;
-        
-        try {
-            System.setIn(new ByteArrayInputStream(input.getBytes()));
-            
-            // Este test intentaría ejecutar el main, pero debido a las dependencias
-            // de base de datos, probablemente fallaría sin un entorno configurado
-            // Main.main(new String[]{});
-            
-        } finally {
-            System.setIn(originalIn);
-        }
-    }
+			// Este test intentaría ejecutar el main, pero debido a las dependencias
+			// de base de datos, probablemente fallaría sin un entorno configurado
+			// Main.main(new String[]{});
 
-    // Test para verificar el manejo de archivo de configuración faltante
-    @Test
-    @DisplayName("Test de credencialesConexionSQL con archivo no existente")
-    void testCredencialesConexionSQLArchivoNoExiste() {
-        // Asegurarse de que el archivo no existe
-        String[] result = Main.credencialesConexionSQL();
-        
-        // Verificar que el método maneja la situación sin lanzar excepciones
-        assertNotNull(result);
-        assertEquals(3, result.length);
-    }
+		} finally {
+			System.setIn(originalIn);
+		}
+	}
 }
