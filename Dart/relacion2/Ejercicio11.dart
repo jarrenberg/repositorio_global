@@ -24,7 +24,8 @@ void main() {
     registro.add(temperatura);
     i++;
   }
-  print(registro);
+  int tempMax = tempsLimite(registro);
+  print("La temperatura maxima de la lista $registro es $tempMax.");
 }
 
 int devolverEnteroValido(String mensaje) {

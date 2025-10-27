@@ -30,7 +30,7 @@ void main() {
   if (esPrimo(num)) {
     print("El numero $num es primo.");
   } else {
-    print("El numero $num no es primo");
+    print("El numero $num no es primo.");
   }
 }
 
