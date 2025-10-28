@@ -43,22 +43,13 @@ public class Main {
 				try {
 					if (con != null) {
 						con.rollback();
+						con.setAutoCommit(true);
 						System.out.println("Transacción revertida debido a un error.");
 					}
 				} catch (SQLException rollbackEx) {
 					rollbackEx.printStackTrace();
 				}
 				ex.printStackTrace();
-			} finally {
-				// Restaurar autocommit y cerrar conexión
-				try {
-					if (con != null) {
-						con.setAutoCommit(true);
-						con.close();
-					}
-				} catch (SQLException closeEx) {
-					closeEx.printStackTrace();
-				}
 			}
 
 		} catch (SQLException ex) {
