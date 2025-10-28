@@ -9,7 +9,7 @@ interface AlumnosFP {
     modulosProfesionales: string[],
     expedientes: Expedientes[]
 }
-interface Expedientes {
+export interface Expedientes {
     curso: string,
     notaMedia: number
 }

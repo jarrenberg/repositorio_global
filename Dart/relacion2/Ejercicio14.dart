@@ -10,15 +10,13 @@ void main() {
   do {
     n = devolverEnteroValido(("Introduzca un entero mayor que 0: "));
   } while (n <= 0);
-  print("La suma de los ${n} primeros numeros enteros es ${sumaNNumerosNaturales(n)}");
+  print(
+    "La suma de los ${n} primeros numeros enteros es ${sumaNNumerosNaturales(n)}",
+  );
 }
 
 int sumaNNumerosNaturales(int n) {
-  int res = 0;
-  for (int i = 1; i <= n; i++) {
-    int anterior = sumaNNumerosNaturales(i);
-    res = anterior + i;
-  }
+  int res = n+sumaNNumerosNaturales(n-1);
   return res;
 }
 
