@@ -16,8 +16,13 @@ void main() {
 }
 
 int sumaNNumerosNaturales(int n) {
-  int res = n+sumaNNumerosNaturales(n-1);
-  return res;
+  int resultado = 0;
+  if (n == 0) {
+    resultado = 0;
+  } else {
+    resultado = n + sumaNNumerosNaturales(n - 1);
+  }
+  return resultado;
 }
 
 int devolverEnteroValido(String mensaje) {

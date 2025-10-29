@@ -23,7 +23,8 @@ public class Main {
 				System.out.println("a) Insertar usuario");
 				System.out.println("b) Numero de entradas del usuario");
 				System.out.println("c) Inicio de sesion");
-				System.out.println("d) Salir\n");
+				System.out.println("d) Mostrar todos los usuarios");
+				System.out.println("e) Salir\n");
 
 				String accion = UtilidadesSQL.devolverString(sc, "Introduzca la accion a realizar: ").toLowerCase();
 
@@ -55,6 +56,10 @@ public class Main {
 					}
 					break;
 				case ("d"):
+					UtilidadesSQL.mostrarTodosRegistrosTabla("usuarios");
+					break;
+
+				case ("e"):
 					System.out.println("Saliendo ...");
 					salir = true;
 					break;
@@ -145,6 +150,9 @@ public class Main {
 
 		return insertado;
 	}
+	
+	// PROCEDIMIENTOS ALMACENADOS
+	
 	/*
 	 * DROP PROCEDURE IF EXISTS proc3; DELIMITER // CREATE PROCEDURE proc3 ( IN
 	 * p_nombre_login VARCHAR(12), IN p_contrasenya VARCHAR(32) ) BEGIN -- Primero

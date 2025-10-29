@@ -1,7 +1,7 @@
 def menu():
     print("MENU DE OPCIONES\n")
     salir = False
-    agenda = dict(Jorge=622024489,Raquel=123456789,Antonio=987654321)
+    agenda = dict(Jorge='1',Raquel='123456789',Antonio='987654321')
 
     while(salir == False):
         print("\na) Listado de teléfonos, usando el orden por defecto.\nb) Listado de teléfonos por orden alfabético.\nc) Añadir un nuevo contacto.\nd) Modificar el teléfono de un contacto.\ne) Buscar un número de teléfono.\nf) Eliminar un contacto.\ng) Borrar el listín telefónico.\nh) Salir\n")
@@ -31,8 +31,11 @@ def menu():
 
             case n if acc=="e":
                 numero=input("Introduzca un numero de telefono: ")
-                print(buscarContactoPorNumero(numero,agenda))
-                
+                nombre=buscarContactoPorNumero(numero,agenda)
+                if buscarContactoPorNumero==None:
+                    print("No se ha encontrado un contacto con ese numero")
+                else:
+                    print(f"El contacto con ese numero es: {nombre}")  
             case n if acc=="f":
                 nombre=input("Introduzca el nombre del contacto que desea eliminar: ")
                 if(borrarContacto(nombre,agenda)):
@@ -83,11 +86,11 @@ def actualizarContacto(nombre:str,numero:str,agenda:dict)->bool:
         actualizado=True
     return actualizado
 
-def buscarContactoPorNumero(numero:str,agenda:dict)->str:
-    resultado=""
-    for key,value in agenda.items():
+def buscarContactoPorNumero(numero:str, agenda:dict)->str:
+    resultado = None
+    for key, value in agenda.items():
         if value == numero:
-            resultado = key
+            resultado= key
     return resultado
 
 def borrarContacto(nombre:str,agenda:dict)->bool:
@@ -108,7 +111,7 @@ def accion()->str:
     letra=False       
     while(letra is False):
         accion = input("Introduzca la accion a realizar: ")
-        if accion.isalpha():
+        if accion.isalpha() and len(accion) == 1:
             letra=True
             accion=accion.lower()
     return accion

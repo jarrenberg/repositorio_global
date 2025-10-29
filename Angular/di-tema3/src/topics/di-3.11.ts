@@ -55,5 +55,31 @@ export class Profesor extends Persona {
 };
 
 export class Alumno extends Persona {
+    private centro: string;
+    private curso: string;
+    private asignaturas: string[];
 
+    constructor(nombre: string, apellidos: string, edad: number, localidad: string, centro: string, curso: string, asignaturas: string[], sexo?: string) {
+        super(nombre, apellidos, edad, localidad, sexo);
+        this.centro = centro;
+        this.curso = curso;
+        this.asignaturas = asignaturas;
+    }
+
+    public getCentro(): string {
+        return this.centro;
+    }
+
+    public getCurso(): string {
+        return this.curso;
+    }
+
+    public getAsignaturas(): string[] {
+        return this.asignaturas;
+    }
 };
+
+const jorge = new Alumno('Jorge','Arrenberg',23,'Málaga','IES Playamar','2ºDAM',['Programacion','Diseño de Interfaces','IPEI II']);
+const antonio = new Profesor('Antonio','Lopez',50,'Torremolinos','IES Playamar','Diseño de Interfaces','Informatica');
+console.table(jorge);
+console.table(antonio);

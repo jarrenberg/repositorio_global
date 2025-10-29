@@ -55,6 +55,7 @@ public class Main {
 		} catch (SQLException ex) {
 			System.out.println(ex.toString());
 		}
+		UtilidadesSQL.mostrarTodosRegistrosTabla("CUENTAS");
 	}
 
 	public static String[] informacionTransaccion(Scanner sc) {
