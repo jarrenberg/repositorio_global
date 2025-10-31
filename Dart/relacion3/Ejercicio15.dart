@@ -5,3 +5,6 @@ extraiga sus diferentes partes: scheme, host, path, fragment, origin, queryParam
 las muestre por pantalla.
 Construye también un objeto de la clase URI definiendo cada una de sus partes.
 Prueba diferentes tipos de URIs como se indica en el artículo indicado. */
+void main(List<String> args) {
+  
+}

@@ -18,7 +18,7 @@ void main(List<String> args) {
 void menu() {
   Map<String, String> grupoWhatsapp = {
     'Pepe': '1',
-    'María': '222222222',
+    'Maria': '222222222',
     'Ana': '3333333',
   };
   bool salir = false;
@@ -55,27 +55,18 @@ void menu() {
         if (buscar == 0) {
           stdout.write("Introduzca el nombre del contacto:");
           String nombre = stdin.readLineSync()!;
-          if (buscarContactoPorNombre(grupoWhatsapp, nombre) == null) {
-            print(
-              "El nombre $nombre no tiene asignado ningun numero de telefono",
-            );
+          if (eliminarContactoPorNombre(grupoWhatsapp, nombre)) {
+            print("El contacto ha sido eliminado");
           } else {
-            print(
-              "El nombre $nombre tiene asignado el numero de telefono ${buscarContactoPorNombre(grupoWhatsapp, nombre)}",
-            );
+            print("No se ha podido eliminar el contacto");
           }
         } else {
           stdout.write("Introduzca el telefono del contacto:");
           String telefono = stdin.readLineSync()!;
-          if (buscarContactoPorNumeroTelefono(grupoWhatsapp, telefono) ==
-              null) {
-            print(
-              "El numero de telefono $telefono no tiene asignado ningun nombre",
-            );
+          if (eliminarContactoPorNumeroTelefono(grupoWhatsapp, telefono)) {
+            print("El contacto ha sido eliminado");
           } else {
-            print(
-              "El numero de telefono $telefono tiene asignado el nombre ${buscarContactoPorNumeroTelefono(grupoWhatsapp, telefono)}",
-            );
+            print("No se ha podido eliminar el contacto");
           }
         }
         break;
@@ -163,17 +154,39 @@ String? buscarContactoPorNumeroTelefono(Map mapa, String telefono) {
   return resultado;
 }
 
-bool eliminarContactoPorNombre(Map mapa ,String nombre){
+bool eliminarContactoPorNombre(Map mapa, String nombre) {
   bool eliminado = false;
-  for(var contacto in mapa.entries){
-    if(contacto.key.toLowerCase()==nombre.toLowerCase()){
-      mapa.remove(contacto.key);
+  bool existe = false;
+  String? nombreEliminar;
+  for (var contacto in mapa.entries) {
+    if (contacto.key.toLowerCase() == nombre.toLowerCase()) {
+      existe = true;
+      nombreEliminar = contacto.key;
     }
   }
+  if (existe) {
+    var res = mapa.remove(nombreEliminar);
+    if (res != null) {
+      eliminado = true;
+    }
+  }
+
   return eliminado;
 }
 
-bool eliminarContactoPorNumeroTelefono(Map mapa ,String nombre){
+bool eliminarContactoPorNumeroTelefono(Map mapa, String telefono) {
+  String? claveAEliminar;
   bool eliminado = false;
+  for (var contacto in mapa.entries) {
+    if (contacto.value == telefono) {
+      claveAEliminar = contacto.key;
+    }
+  }
+
+  if (claveAEliminar != null) {
+    mapa.remove(claveAEliminar);
+    eliminado = true;
+  }
+
   return eliminado;
 }

@@ -16,7 +16,7 @@ void main(List<String> args) {
   } else {
     print("La cartera no esta ni toda en minusculas ni toda en mayusculas");
   }
-  print("Para crear un caracter multi\nlinea usamos el caracter de escape %\n");
+  print("Para crear un caracter multi\nlinea usamos el caracter de escape \\n");
 }
 
 bool comprobarCadenaMayusculas(String cadena) {
