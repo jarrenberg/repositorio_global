@@ -1,4 +1,5 @@
 /// A Calculator.
+library;
 
 import 'dart:convert';
 

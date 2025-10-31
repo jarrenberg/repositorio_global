@@ -28,13 +28,14 @@ public class Ticket {
 
 	// MÉTODO MEJORADO - siempre crea un objeto pero controla si es válido
 	private static synchronized ResultadoTicket generarNumeroTicket(String vendedor) {
+		ResultadoTicket rs;
 		if (numeroTicketsEmitidos >= MAX_TICKETS) {
-			// Límite alcanzado - ticket no válido
-			return new ResultadoTicket(-1, false);
+			rs = new ResultadoTicket(-1, false);
+		} else {
+			numeroTicketsEmitidos++;
+			rs = new ResultadoTicket(numeroTicketsEmitidos, true);
 		}
-
-		numeroTicketsEmitidos++;
-		return new ResultadoTicket(numeroTicketsEmitidos, true);
+		return rs;
 	}
 
 	public static int getNumeroTicketsEmitidos() {
