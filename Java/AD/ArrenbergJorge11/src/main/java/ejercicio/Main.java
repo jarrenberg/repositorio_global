@@ -10,6 +10,7 @@ public class Main {
 	}
 
 	public static void menu() throws SQLException {
+		String conexion = "jdbc:sqlite:C:\\DAM\\2º DAM\\Java\\AD\\ArrenbergJorge11\\mantenimiento.db";
 		boolean salir = false;
 		try (Scanner sc = new Scanner(System.in)) {
 			do {
@@ -30,8 +31,7 @@ public class Main {
 				case 1:
 					String tabla = UtilidadesSQLite.devolverString(sc,
 							"Introduzca el nombre de la tabla que le gustaria mostrar: ");
-					UtilidadesSQLite.mostrarTodosRegistrosTabla(tabla,
-							"jdbc:sqlite:C:\\DAM\\2º DAM\\Java\\AD\\ArrenbergJorge11\\mantenimiento.db");
+					UtilidadesSQLite.mostrarTodosRegistrosTabla(tabla, conexion);
 					break;
 				case 2:
 					String codigoEquipo = UtilidadesSQLite.devolverString(sc,
@@ -42,13 +42,12 @@ public class Main {
 					parametros.add(codigoEquipo);
 					parametros.add(modelo);
 					parametros.add(descripcion);
-					if (UtilidadesSQLite.anyadirABaseDeDatos("equipos",
-							"jdbc:sqlite:C:\\DAM\\2º DAM\\Java\\AD\\ArrenbergJorge11\\mantenimiento.db", parametros)) {
+					if (UtilidadesSQLite.anyadirABaseDeDatos("equipos", conexion, parametros)) {
 						System.out.println("Se ha añadido el equipo a la base de datos");
 					} else {
 						System.out.println("No se ha añadido el equipo a la base de datos");
 					}
-
+					break;
 				case 3:
 					String codigoPieza = UtilidadesSQLite.devolverString(sc,
 							"Introduzca el codigo de la pieza a añadir:  ");
@@ -65,8 +64,7 @@ public class Main {
 					parametros.add(descripcion);
 					parametros.add(unidades);
 					parametros.add(codigoEquipo);
-					if (UtilidadesSQLite.anyadirABaseDeDatos("piezas",
-							"jdbc:sqlite:C:\\DAM\\2º DAM\\Java\\AD\\ArrenbergJorge11\\mantenimiento.db", parametros)) {
+					if (UtilidadesSQLite.anyadirABaseDeDatos("piezas", conexion, parametros)) {
 						System.out.println("Se ha añadido la pieza a la base de datos");
 					} else {
 						System.out.println("No se ha añadido la pieza a la base de datos");
@@ -79,9 +77,8 @@ public class Main {
 					String campo = UtilidadesSQLite.devolverString(sc,
 							"Introduzca el campo que le gustaria modificar: ");
 					String valor = UtilidadesSQLite.devolverString(sc, "Introduzca el nuevo valor: ");
-					if (UtilidadesSQLite.modificarRegistroBaseDeDatos("equipos",
-							"jdbc:sqlite:C:\\DAM\\2º DAM\\Java\\AD\\ArrenbergJorge11\\mantenimiento.db", "codigo",
-							codigoEquipo, campo, valor)) {
+					if (UtilidadesSQLite.modificarRegistroBaseDeDatos("equipos", conexion, "codigo", codigoEquipo,
+							campo, valor)) {
 						System.out.println("El equipo ha sido modificado");
 					} else {
 						System.out.println("El equipo no ha sido modificado");
@@ -93,9 +90,8 @@ public class Main {
 							"Introduzca el codigo de la pieza que le gustaria modificar: ");
 					campo = UtilidadesSQLite.devolverString(sc, "Introduzca el campo que le gustaria modificar: ");
 					valor = UtilidadesSQLite.devolverString(sc, "Introduzca el nuevo valor: ");
-					if (UtilidadesSQLite.modificarRegistroBaseDeDatos("piezas",
-							"jdbc:sqlite:C:\\DAM\\2º DAM\\Java\\AD\\ArrenbergJorge11\\mantenimiento.db", "codigo",
-							codigoPieza, campo, valor)) {
+					if (UtilidadesSQLite.modificarRegistroBaseDeDatos("piezas", conexion, "codigo", codigoPieza, campo,
+							valor)) {
 						System.out.println("El equipo ha sido modificado");
 					} else {
 						System.out.println("El equipo no ha sido modificado");
@@ -105,9 +101,8 @@ public class Main {
 					campo = UtilidadesSQLite.devolverString(sc,
 							"Introduzca el campo por el cual filtraremos para eliminar el equipo: ");
 					valor = UtilidadesSQLite.devolverString(sc, "Introduzca el valor que tiene dicho campo: ");
-					if (UtilidadesSQLite.eliminarRegistroBaseDeDatos("equipos","piezas",
-							"jdbc:sqlite:C:\\DAM\\2º DAM\\Java\\AD\\ArrenbergJorge11\\mantenimiento.db", campo, valor,
-							"codigo","equipo_codigo")) {
+					if (UtilidadesSQLite.eliminarRegistroBaseDeDatos("equipos", "piezas", conexion, campo, valor,
+							"codigo", "equipo_codigo")) {
 						System.out.println("Se ha eliminado el equipo de la base de datos");
 					} else {
 						System.out.println("No se ha podido eliminar el equipo de la base de datos");
@@ -117,9 +112,7 @@ public class Main {
 					campo = UtilidadesSQLite.devolverString(sc,
 							"Introduzca el campo por el cual filtraremos para eliminar la pieza: ");
 					valor = UtilidadesSQLite.devolverString(sc, "Introduzca el valor que tiene dicho campo: ");
-					if (UtilidadesSQLite.eliminarRegistroBaseDeDatos("piezas",
-							"jdbc:sqlite:C:\\DAM\\2º DAM\\Java\\AD\\ArrenbergJorge11\\mantenimiento.db", campo,
-							valor,"codigo")) {
+					if (UtilidadesSQLite.eliminarRegistroBaseDeDatos("piezas", conexion, campo, valor, "codigo")) {
 						System.out.println("Se ha eliminado la pieza de la base de datos");
 					} else {
 						System.out.println("No se ha podido eliminar la pieza de la base de datos");
@@ -136,6 +129,8 @@ public class Main {
 		}
 	}
 }
-//INSERT INTO "main"."equipos" VALUES ('EQ-05','test','modelotest');
+// INSERT INTO "main"."equipos" VALUES ('EQ-05','test','modelotest');
 // INSERT INTO "main"."piezas" VALUES ('PI01','locotron','terano','12','EQ-05');
 // INSERT INTO "main"."piezas" VALUES ('PI02','locotron2','terano3','1','EQ-05');
+// INSERT INTO "main"."equipos" VALUES ('EQ-06','parole','ventilador');
+// INSERT INTO "main"."piezas" VALUES ('PI05','cartera','fundicion','6','EQ-06');

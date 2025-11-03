@@ -1,8 +1,5 @@
 package ejercicio;
 
-import java.awt.List;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -15,7 +12,6 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
-import java.util.Properties;
 import java.util.Scanner;
 
 public class UtilidadesSQLite {
@@ -98,44 +94,6 @@ public class UtilidadesSQLite {
 		return f;
 	}
 
-	public static boolean existeEntryParamInt(int param, String campo, String nombreTabla) {
-		boolean existe = false;
-		try (Connection conn = DriverManager
-				.getConnection("jdbc:sqlite:C:\\DAM2\\Java\\AD\\ArrenbergJorge11\\mantenimiento.db");
-				PreparedStatement ps1 = conn
-						.prepareStatement(String.format("SELECT * from %s where %s=?", nombreTabla, campo))) {
-			ps1.setInt(1, param);
-			ResultSet rs = ps1.executeQuery();
-			while (rs.next()) {
-				existe = true;
-			}
-		} catch (SQLException ex) {
-			System.out.println(ex.toString());
-		} catch (Exception ex) {
-			System.out.println(ex.toString());
-		}
-		return existe;
-	}
-
-	public static boolean existeEntryParamString(String param, String campo, String nombreTabla) {
-		boolean existe = false;
-		try (Connection conn = DriverManager
-				.getConnection("jdbc:sqlite:C:\\DAM2\\Java\\AD\\ArrenbergJorge11\\mantenimiento.db");
-				PreparedStatement ps1 = conn
-						.prepareStatement(String.format("SELECT * from %s where %s=?", nombreTabla, campo))) {
-			ps1.setString(1, param);
-			ResultSet rs = ps1.executeQuery();
-			while (rs.next()) {
-				existe = true;
-			}
-		} catch (SQLException ex) {
-			System.out.println(ex.toString());
-		} catch (Exception ex) {
-			System.out.println(ex.toString());
-		}
-		return existe;
-	}
-
 	public static void mostrarTablas(String baseDeDatos, String conexion) {
 		try (Connection conn = DriverManager.getConnection(conexion);
 				PreparedStatement ps1 = conn.prepareStatement("SELECT name FROM sqlite_master WHERE type='table'")) {
@@ -163,18 +121,17 @@ public class UtilidadesSQLite {
 			System.out.printf("\n***  TABLA %s  ***\n", tabla);
 
 			for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-				System.out.printf("| %-20s ", rsmd.getColumnName(i));
+				System.out.printf("| %-40s ", rsmd.getColumnName(i));
 			}
 			System.out.println("|");
 
 			for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-				System.out.printf("|%-22s", "----------------------");
+				System.out.printf("|%-42s", "------------------------------------------");
 			}
 			System.out.println("|");
-
 			while (rs.next()) {
 				for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-					System.out.printf("| %-20s ", rs.getString(i));
+					System.out.printf("| %-40s ", rs.getString(i));
 				}
 				System.out.println("|");
 			}
@@ -195,8 +152,6 @@ public class UtilidadesSQLite {
 			}
 			valores = valores.substring(0, valores.length() - 1);
 			String sentencia = String.format("insert into %s values %s)", tabla, valores);
-
-			System.out.println(sentencia);
 			int rs = st.executeUpdate(sentencia);
 			if (rs > 0) {
 				insertado = true;
@@ -307,5 +262,4 @@ public class UtilidadesSQLite {
 		}
 		return eliminado;
 	}
-
 }
