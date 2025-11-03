@@ -26,11 +26,12 @@ class Restaurante {
     this.ratings.forEach((n) {
       resultado = resultado + n;
     });
-    resultado=resultado/ratings.length;
+    resultado = resultado / ratings.length;
     return resultado;
   }
 }
 
 void main(List<String> args) {
-  var baratie = ("Restaurante Baratie","Sanji",[1,7.8,5.4]);
+  final baratie = Restaurante("Restaurante Baratie", "Sanji", [1, 7.8, 5.4]);
+  print(baratie.getRatingMedio());
 }

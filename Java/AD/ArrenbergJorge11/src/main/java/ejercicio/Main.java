@@ -10,7 +10,7 @@ public class Main {
 	}
 
 	public static void menu() throws SQLException {
-		String conexion = "jdbc:sqlite:C:\\DAM\\2º DAM\\Java\\AD\\ArrenbergJorge11\\mantenimiento.db";
+		String conexion = "jdbc:sqlite:mantenimiento.db";
 		boolean salir = false;
 		try (Scanner sc = new Scanner(System.in)) {
 			do {

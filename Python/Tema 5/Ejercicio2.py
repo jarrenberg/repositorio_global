@@ -27,7 +27,8 @@ def pedir_cadenas()->list:
     n="0"
     while n!="":
         n = input("Introduzca una cadena de texto: ")
-        lista.append(n)
+        if n!=0:
+            lista.append(n)
     return lista
 
 def main():
