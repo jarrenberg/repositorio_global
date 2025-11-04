@@ -13,7 +13,6 @@ while impar == False:
     base = int(input("Introduzca el tamaño de la base de la piramide (Este texto se repetira mientras el numero introducido no sea impar):"))
     if(int(base%2)==1):
         impar = True
-        print(impar)
 
 espacios=int((base/2)+1)
 numAsteriscos=1

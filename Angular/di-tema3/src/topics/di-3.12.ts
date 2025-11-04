@@ -34,6 +34,9 @@ class Persona {
     public getDireccion(): Direccion {
         return this.direccion;
     }
+    public toString(): string {
+        return `Nombre Completo: ${this.nombre} ${this.apellidos}, Genero: ${this.genero}, Telefono: ${this.telefono}, Direccion: ${this.direccion}`;
+    }
 };
 
 export class Jugador extends Persona {
@@ -50,6 +53,10 @@ export class Jugador extends Persona {
     public getCategoria(): number {
         return this.categoria;
     }
+
+    public toString(): string {
+        return `${super.toString()}, Categoria: ${this.categoria}\n`;
+    }
 };
 
 export class Arbitro extends Persona {
@@ -61,6 +68,9 @@ export class Arbitro extends Persona {
 
     public getNumeroColegiado(): number {
         return this.numeroColegiado;
+    }
+    public toString(): string {
+        return `${super.toString()}, Numero de colegiado: ${this.numeroColegiado}\n`;
     }
 };
 
@@ -122,6 +132,11 @@ export class Partido {
 
     public getArbitro(): Arbitro {
         return this.arbitro;
+    }
+    public toString(): string {
+        const resultado: string = `Equipo 1 = ${this.equipos[0].getMiembrosEquipo().toString()}, Equipo 2 = ${this.equipos[1].getMiembrosEquipo().toString()}, Fecha: ${this.fecha.getDate()} ${this.fecha.getMonth() + 1} ${this.fecha.getFullYear()},
+         Hora: ${this.hora}, Recinto: ${this.recinto}, Pista: ${this.pista}, Arbitro: ${this.arbitro.toString()}`;
+        return resultado;
     }
 
 };
@@ -287,39 +302,39 @@ const arbitro2 = new Arbitro(
 
 // Crear partidos
 const partidos: Partido[] = [];
-    const partido1 = new Partido(
-        [equipos[0], equipos[1]],
-        new Date('2024-02-15'),
-        18,
-        'Polideportivo Municipal',
-        'Pista Central',
-        arbitro1
-    );
-    partidos.push(partido1);
+const partido1 = new Partido(
+    [equipos[0], equipos[1]],
+    new Date('2024-02-15'),
+    18,
+    'Polideportivo Municipal',
+    'Pista Central',
+    arbitro1
+);
+partidos.push(partido1);
 
-    const partido2 = new Partido(
-        [equipos[1], equipos[2]],
-        new Date('2024-02-20'),
-        20,
-        'Club Deportivo Local',
-        'Pista 1',
-        arbitro2
-    );
-    partidos.push(partido2);
+const partido2 = new Partido(
+    [equipos[1], equipos[2]],
+    new Date('2024-02-20'),
+    20,
+    'Club Deportivo Local',
+    'Pista 1',
+    arbitro2
+);
+partidos.push(partido2);
 
-    const partido3 = new Partido(
-        [equipos[0], equipos[2]],
-        new Date('2024-02-25'),
-        19,
-        'Polideportivo Municipal',
-        'Pista 2',
-        arbitro1
-    );
-    partidos.push(partido3);
+const partido3 = new Partido(
+    [equipos[0], equipos[2]],
+    new Date('2024-02-25'),
+    19,
+    'Polideportivo Municipal',
+    'Pista 2',
+    arbitro1
+);
+partidos.push(partido3);
 
-const calendario = new Calendario(partidos);
+export const calendario = new Calendario(partidos);
 
-console.log('=== CALENDARIO DE PARTIDOS ===\n');
+/*console.log('=== CALENDARIO DE PARTIDOS ===\n');
 
 calendario.getPartidos().forEach((partido, index) => {
     console.log(`PARTIDO ${index + 1}:`);
@@ -356,4 +371,4 @@ console.log('=== RESUMEN ===');
 console.log(`Total equipos creados: ${equipos.length}`);
 console.log(`Total árbitros creados: 2`);
 console.log(`Total partidos programados: ${partidos.length}`);
-console.log(`Período del calendario: ${partidos[0].getFecha().toLocaleDateString()} - ${partidos[partidos.length - 1].getFecha().toLocaleDateString()}`);
+console.log(`Período del calendario: ${partidos[0].getFecha().toLocaleDateString()} - ${partidos[partidos.length - 1].getFecha().toLocaleDateString()}`);*/
