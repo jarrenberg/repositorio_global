@@ -4,21 +4,23 @@ podrían no saberse, en cuyo caso, se mostrará el nombre ‘desconocido’ y/o 
 serán una suerte de valores por defecto. (Función con parámetros opcionales, y sin
 devolución de valor de retorno)*/
 
-void main(){
+void main() {
+  // Mostramos los saludos a empleados con distintos nombres e id
   print(saludoEmpleado("Jorge", 34));
   print(saludoEmpleado(null, null));
   print(saludoEmpleado("Jorge", null));
   print(saludoEmpleado(null, 34));
 }
 
-String saludoEmpleado(String? nombre, int? id){
-  String? nombreFinal=nombre;
-  int? idFinal=id;
-  if(id == null){
-    idFinal=999;
+// Metodo que devuelve un saludo cuyo nombre e id se pasan como parametros y pueden ser nulos
+String saludoEmpleado(String? nombre, int? id) {
+  String? nombreFinal = nombre;
+  int? idFinal = id;
+  if (id == null) {
+    idFinal = 999;
   }
-  if(nombre == null){
-    nombreFinal="desconocido";
+  if (nombre == null) {
+    nombreFinal = "desconocido";
   }
   return "Hola empleado $nombreFinal con id $idFinal";
 }

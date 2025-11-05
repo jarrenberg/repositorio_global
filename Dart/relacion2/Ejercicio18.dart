@@ -3,10 +3,7 @@ una función que devuelva los números de la serie de Fibonacci hasta llegar al 
 n-ésimo, siendo n un valor entero declarado e inicializado al principio del programa*/
 import 'dart:io';
 
-List devolverLista(int num) {
-  List resultado = serieFibonacci(num);
-  return resultado;
-}
+// Metodo que recibe como parametro un mensaje para mostrar al usuario y devuelve un entero valido
 int devolverEnteroValido(String mensaje) {
   bool numValido = false;
   int n = 0;
@@ -23,25 +20,28 @@ int devolverEnteroValido(String mensaje) {
 
 void main() {
   int n = 0;
-  while(n<=0){
+  // Pedimos al usuario que introduzca un numero entero mayor que -1 hasta que sea valido
+  while (n <= 0) {
     n = devolverEnteroValido("Introduzca un numero enero positivo: ");
   }
-  List numeros = devolverLista(n);
+  // Guardamos la lista de numeros de fibonacci hasta el numero introducido como parametro y la mostramos
+  List numeros = serieFibonacci(n);
   print("La lista de los $n primeros numeros de fibonacci es: $numeros");
 }
 
+// Metodo que devuelve una lista con los valores de la serie de fibonacci hasta el limite pasado como parametro
 List<int> serieFibonacci(int limite) {
   List<int> resultado = [];
-  
+
   int a = 0;
   int b = 1;
-  
+
   for (int i = 0; i < limite; i++) {
     resultado.add(a);
     int siguiente = a + b;
     a = b;
     b = siguiente;
   }
-  
+
   return resultado;
 }

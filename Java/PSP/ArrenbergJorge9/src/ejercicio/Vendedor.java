@@ -19,7 +19,6 @@ public class Vendedor extends Thread {
                 System.out.println(ticket.toString());
             } else {
                 System.out.println(nombre + " no puede emitir más tickets - Límite alcanzado");
-                break;
             }
             
             try {

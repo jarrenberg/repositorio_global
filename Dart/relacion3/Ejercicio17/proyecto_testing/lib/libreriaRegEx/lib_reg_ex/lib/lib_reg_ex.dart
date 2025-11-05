@@ -2,6 +2,7 @@
 library;
 
 import 'dart:convert';
+import 'dart:io';
 
 bool letraDNIValida(String cadena) {
   bool valido = false;
@@ -17,7 +18,9 @@ bool letraDNIValida(String cadena) {
     if ((letrasDNI.elementAt((resto)) == letra) && (regex.hasMatch(cadena))) {
       valido = true;
     }
-  } catch (ex) {}
+  } catch (ex) {
+    stdout.write(ex.toString());
+  }
   return valido;
 }
 

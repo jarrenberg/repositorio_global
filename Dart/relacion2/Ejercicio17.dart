@@ -16,6 +16,7 @@ void main() {
   int n1 = -1;
   int n2 = -1;
 
+  // Pedimos al usuario que introduzca dos numeros enteros mayorques que -1 hasta que ambos sean validos
   while (n1 <= 0) {
     n1 = devolverEnteroValido("Introduzca un numero entero");
   }
@@ -23,19 +24,23 @@ void main() {
     n2 = devolverEnteroValido("Introduzca un numero entero");
   }
 
+  // Asignamos los valores del dividendo y el divisor en funcion de los valores introducidos por el usuario
   int dividendo = n1 >= n2 ? n1 : n2;
   int divisor = n1 >= n2 ? n2 : n1;
   List<int>? resultadoLista;
   try {
+    // Guardamos en una lista el cociente y el resto de la division entera de los parametros dividendo y divisor
     resultadoLista = divisionEnteraLista(dividendo, divisor);
     int cociente = resultadoLista[0];
     int resto = resultadoLista[1];
+    // Mostramos el cociente y el resto
     print("El cociente de la division es $cociente y el resto es $resto");
   } catch (ex) {
     print(ex.toString());
   }
 }
 
+// Metodo que recibe como parametro un mensaje para mostrar al usuario y devuelve un entero valido
 int devolverEnteroValido(String mensaje) {
   bool numValido = false;
   int n = 0;
@@ -50,6 +55,7 @@ int devolverEnteroValido(String mensaje) {
   }
 }
 
+// Metodo que devuelve el cociente de la division entre el primer y el segundo parametro
 int devolverCociente(int dividendo, int divisor) {
   if (dividendo < divisor) {
     return 0;
@@ -57,6 +63,7 @@ int devolverCociente(int dividendo, int divisor) {
   return 1 + devolverCociente(dividendo - divisor, divisor);
 }
 
+// Metodo que devuelve el resto de la division entre el primer y el segundo parametro
 int devolverResto(int dividendo, int divisor) {
   if (dividendo < divisor) {
     return dividendo;
@@ -64,6 +71,7 @@ int devolverResto(int dividendo, int divisor) {
   return devolverResto(dividendo - divisor, divisor);
 }
 
+// Metodo que devuelve una lista con el cociente y el resto de la division entre el primer y el segundo parametro
 List<int> divisionEnteraLista(int dividendo, int divisor) {
   return [
     devolverCociente(dividendo, divisor),

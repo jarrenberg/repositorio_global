@@ -5,15 +5,18 @@ import 'dart:io';
 
 void main() {
   int n;
+  // Pedimos al usuario un numero entero mayor que 0 hasta que lo introduzca
   do {
     n = devolverEnteroValido(
       "Introduzca un entero positivo para calcular su factorial: ",
     );
   } while (n < 0);
+  // Mostramos el factorial de n mediante el metodo
 
   print("El factorial de $n es ${calcularFactorial(n)}");
 }
 
+// Metodo que recibe como parametro un mensaje para mostrar al usuario y devuelve un entero valido
 int devolverEnteroValido(String mensaje) {
   bool numValido = false;
   int n = 0;

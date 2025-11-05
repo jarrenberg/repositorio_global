@@ -15,26 +15,31 @@ void main() {
   int n1 = -1;
   int n2 = -1;
 
+  // Pedimos al usuario dos numeros enteros mayores que 0 hasta que los introduce
   while (n1 <= 0) {
     n1 = devolverEnteroValido("Introduzca un numero entero");
   }
   while (n2 <= 0) {
     n2 = devolverEnteroValido("Introduzca un numero entero");
   }
+  // Asignamos a cada variable un valor en funcion de que valor introducido por el usuario es mayor
 
   int dividendo = n1 >= n2 ? n1 : n2;
   int divisor = n1 >= n2 ? n2 : n1;
   List<int>? resultadoLista;
+  // Guardamos en una lista el cociente y el resto de la division entera entre el dividendo y el divisor pasados como parametros
   try {
     resultadoLista = divisionEnteraLista(dividendo, divisor);
     int cociente = resultadoLista[0];
     int resto = resultadoLista[1];
+    // Mostramos el cociente y el resto
     print("El cociente de la division es $cociente y el resto es $resto");
   } catch (ex) {
     print(ex.toString());
   }
 }
 
+// Metodo que recibe como parametro un mensaje para mostrar al usuario y devuelve un entero valido
 int devolverEnteroValido(String mensaje) {
   bool numValido = false;
   int n = 0;
@@ -71,7 +76,7 @@ int devolverResto(int dividendo, int divisor) {
 
   int resto = dividendo;
   int cociente = 0;
-  
+
   while (resto >= divisor) {
     resto -= divisor;
     cociente = cociente + 1;

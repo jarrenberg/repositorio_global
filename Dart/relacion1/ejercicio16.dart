@@ -6,30 +6,45 @@ casos, usa forEach
 
 import 'dart:io';
 
-void main(){
-List<String> laborables = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes'];
+void main() {
+  // Declaramos una lista con los dias laborables
+  List<String> laborables = [
+    'Lunes',
+    'Martes',
+    'Miércoles',
+    'Jueves',
+    'Viernes',
+  ];
+  // Mostramos dicha lista
+  print("Los dias laborables son:");
 
-print("Los dias laborables son:");
+  for (int i = 0; i < laborables.length; i++) {
+    stdout.write("${laborables[i]} ");
+  }
+  print("");
 
-for(int i =0; i<laborables.length;i++){
-  stdout.write("${laborables[i]} ");
+  // Añadimos el sabado y el domingo a la lista de dias laborables
+  print("Añadiendo el Sabado y el Domingo ...");
+  laborables.add("Sabado");
+  laborables.add("Domingo");
+
+  // Mostramos los dias de la semana
+  print("Mostrando los dias de la semana ...");
+  for (int i = 0; i < laborables.length; i++) {
+    stdout.write("${laborables[i]} ");
+  }
+  stdout.write("\n\n");
+
+  // Creamos un mapa con alumnos de la clase, con clave su nombre y valor su edad
+  Map<String, int> personas = Map.new();
+  print("Añadiendo alumnos a la clase ...");
+  personas.addEntries([
+    MapEntry("Jorge", 23),
+    MapEntry("Antonio", 24),
+    MapEntry("Raquel", 25),
+    MapEntry("Eliana", 19),
+  ]);
+
+  // Mostramos el nombre y la edad de cada alumno de la clase
+  personas.forEach((nombre, edad) => stdout.write("$nombre, $edad años\n"));
 }
-print("");
-print("Añadiendo el Sabado y el Domingo ...");
-laborables.add("Sabado");
-laborables.add("Domingo");
-
-print("Mostrando los dias de la semana ...");
-for(int i =0; i<laborables.length;i++){
-  stdout.write("${laborables[i]} ");
-}
-stdout.write("\n\n");
-
-
-Map<String,int>personas=Map.new();
-print("Añadiendo alumnos a la clase ...");
-personas.addEntries([MapEntry("Jorge", 23),MapEntry("Antonio", 24),MapEntry("Raquel", 25),MapEntry("Eliana",19)]);
-personas.forEach((nombre, edad) => stdout.write("$nombre, $edad años\n"));
-
-}
-

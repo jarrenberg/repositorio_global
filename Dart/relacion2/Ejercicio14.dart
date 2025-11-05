@@ -7,14 +7,18 @@ import 'dart:io';
 
 void main() {
   int n;
+  // Pedimos al usuario un entero mayor que -1 hasta que el numero sea valido
   do {
     n = devolverEnteroValido(("Introduzca un entero mayor que 0: "));
   } while (n <= 0);
+
+  // Mostramos la suma de los n primeros numeros enteros hasta el numero introducido por el usuario utilizando el metodo
   print(
     "La suma de los ${n} primeros numeros enteros es ${sumaNNumerosNaturales(n)}",
   );
 }
 
+// Metodo que devuelve la suma de los numeros naturales hasta el entero pasado como parametro
 int sumaNNumerosNaturales(int n) {
   int resultado = 0;
   if (n == 0) {
@@ -25,6 +29,7 @@ int sumaNNumerosNaturales(int n) {
   return resultado;
 }
 
+// Metodo que recibe como parametro un mensaje para mostrar al usuario y devuelve un entero valido
 int devolverEnteroValido(String mensaje) {
   bool numValido = false;
   int n = 0;

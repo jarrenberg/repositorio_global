@@ -1,5 +1,6 @@
 import 'dart:io';
 
+// Metodo que recibe como parametro un mensaje para mostrar al usuario y devuelve un entero valido
 int devolverEnteroValido(String mensaje) {
   bool numValido = false;
   int n = 0;
@@ -14,6 +15,7 @@ int devolverEnteroValido(String mensaje) {
   }
 }
 
+// Metodo que devuelve la temperatura maxima de la lista pasada como parametro
 int tempsLimite(List lista) {
   return lista.reduce((tempMax, temp) => temp > tempMax ? temp : tempMax);
 }

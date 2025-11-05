@@ -3,18 +3,25 @@ mostrando todo (clave-valor), que lo recorra mostrando solo las claves, y tambi�
 mostrando solo los valores. ¿Qué pasaría si sabemos que alguna de las edades no están
 inicializadas?*/
 void main() {
-  Map<String,int?> personas = new Map();
-personas.addEntries([MapEntry("Jorge", 23),MapEntry("Raquel", 25),MapEntry("Antonio", 24),MapEntry("Eliana",null)]);
+  // Creamos un mapa vacio y le añadimos entradas con personas de la clase, usando su nombre como clave y su edad como valor
+  Map<String, int?> personas = new Map();
+  personas.addEntries([
+    MapEntry("Jorge", 23),
+    MapEntry("Raquel", 25),
+    MapEntry("Antonio", 24),
+    MapEntry("Eliana", null),
+  ]);
 
-print("Mostrando toda la informacion de los alumnos de la clase ...");
-personas.forEach((nombre,edad)=>print("$nombre, $edad años"));
+  // Mostramos toda la informacion de los alumnos en clase
+  print("Mostrando toda la informacion de los alumnos de la clase ...");
+  personas.forEach((nombre, edad) => print("$nombre, $edad años"));
 
-print("Mostrando los nombres los alumnos de la clase ...");
-personas.forEach((nombre,edad)=>print("$nombre"));
+  // Mostramos los nombres de los alumnos en clase
+  print("Mostrando los nombres los alumnos de la clase ...");
+  personas.forEach((nombre, edad) => print("$nombre"));
+  // Mostramos la edad de los alumnos en clase
+  print("Mostrando los edades de los alumnos de la clase ...");
+  personas.forEach((nombre, edad) => print("$edad"));
 
-print("Mostrando los edades de los alumnos de la clase ...");
-personas.forEach((nombre,edad)=>print("$edad"));
-
-// En el caso de que algun valor no este inicializado, como es el caso de Eliana mostrara null
-
+  // En el caso de que algun valor no este inicializado, como es el caso de Eliana mostrara null
 }

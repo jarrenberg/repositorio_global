@@ -6,30 +6,34 @@ import 'dart:io';
 
 void main() {
   String? resultado;
-  stdout.write('Por favor, un lado del triangulo:\n'); // Solicita un numero al user
-  int? l1 = int.parse(stdin.readLineSync()!); // Guarda la entrada como un entero
-  
-  stdout.write('\nPor favor, un lado del triangulo:\n'); 
-  int? l2 = int.parse(stdin.readLineSync()!); 
+  stdout.write(
+    'Por favor, un lado del triangulo:\n',
+  ); // Solicita un numero al user
+  int? l1 = int.parse(
+    stdin.readLineSync()!,
+  ); // Guarda la entrada como un entero
 
-  stdout.write('\nPor favor, un lado del triangulo:\n');
-  int? l3 = int.parse(stdin.readLineSync()!);
+  stdout.write(
+    '\nPor favor, un lado del triangulo:\n',
+  ); // Solicita un numero al user
+  int? l2 = int.parse(
+    stdin.readLineSync()!,
+  ); // Guarda la entrada como un entero
 
-  if((l1==l2) && (l1==l3)){
-    resultado="El triangulo es equilatero";
-  }else if((l1==l2)&&(l1!=l3)){
+  stdout.write(
+    '\nPor favor, un lado del triangulo:\n',
+  ); // Solicita un numero al user
+  int? l3 = int.parse(
+    stdin.readLineSync()!,
+  ); // Guarda la entrada como un entero
+
+  //Dependiendo de la longitud de cada lago mostramos el tipo de triangulo que es
+  if ((l1 == l2) && (l1 == l3)) {
+    resultado = "El triangulo es equilatero";
+  } else if ((l1 == l2) && (l1 != l3)) {
     resultado = "El triangulo es isosceles";
-  }else{
+  } else {
     resultado = "El triangulo es escaleno";
   }
-print("$resultado");
-
-
-
-
-  
-
-
-
-
+  print("$resultado");
 }

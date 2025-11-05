@@ -9,7 +9,7 @@ class Restaurante {
     this.ratings = ratings;
   }
 
-  int getCantidadRatiings() {
+  int getCantidadRatings() {
     return this.ratings.length;
   }
 

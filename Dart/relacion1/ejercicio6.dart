@@ -5,7 +5,8 @@ dependerá del operador en sí, funcionará como una rudimentaria calculadora*/
 
 import 'dart:io';
 
-void main(){
+void main() {
+  //Pedimos al usuario que introduzca dos enteros y el operando de la operacion que quiere realizar
   stdout.write('Por favor, introduzca un entero:\n');
   int? n1 = int.parse(stdin.readLineSync()!);
 
@@ -17,34 +18,33 @@ void main(){
 
   int? resultado;
 
-  switch(operando){
+// Depeiendo del operando, realizamos una operacion
+  switch (operando) {
     case '+':
-    resultado = n1+n2;
-    print("El resultado es: $resultado");
-    break;
-    case '-':
-    resultado = n1-n2;
-    print("El resultado es: $resultado");
-    break;
-    case '*':
-    resultado = n1*n2;
-    print("El resultado es: $resultado");
-    break;
-    case '~/':
-    if(n2!=0){
-      resultado=(n1~/n2);
+      resultado = n1 + n2;
       print("El resultado es: $resultado");
-    }else{
-      print("El resultado es invalido, ya que no se puede dividir entre 0");
-    }
-    break;
+      break;
+    case '-':
+      resultado = n1 - n2;
+      print("El resultado es: $resultado");
+      break;
+    case '*':
+      resultado = n1 * n2;
+      print("El resultado es: $resultado");
+      break;
+    case '~/':
+      if (n2 != 0) {
+        resultado = (n1 ~/ n2);
+        print("El resultado es: $resultado");
+      } else {
+        print("El resultado es invalido, ya que no se puede dividir entre 0");
+      }
+      break;
     case '%':
-    resultado = (n1%n2);
-     print("El resultado es: $resultado");
-    break;
+      resultado = (n1 % n2);
+      print("El resultado es: $resultado");
+      break;
     default:
-    print("El operando introducido (${operando}) no es correcto.");
+      print("El operando introducido (${operando}) no es correcto.");
   }
-
-
 }

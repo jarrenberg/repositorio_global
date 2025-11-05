@@ -7,6 +7,8 @@ import 'dart:math';
 
 void main() {
   double a = 0;
+  // Pedimos al usuario que introduzca los terminos de la ecuacion, verificando que mientras el primer termino sea 0 no se guarde
+  // Una vez tenemos un numero valido lo convertimos a double
   while (a == 0) {
     stdout.write(
       'Por favor, introduzca el coeficiente del termino elevado al cuadrado:\n',
@@ -22,18 +24,20 @@ void main() {
   );
   double? c = double.parse(stdin.readLineSync()!);
 
+  // Calculamos las dos soluciones de la ecuacion
   num r1 = (-b + sqrt((b * b) - (4 * a * c))) / (2 * a);
   num r2 = (-b - sqrt((b * b) - (4 * a * c))) / (2 * a);
 
-if (r1.isNaN && r2.isNaN) {
-  print("No existen relaciones reales a la ecuacion");
-} else if (r1.isNaN) {
-  print("El resultado de la ecuacion introducida es $r2");
-} else if (r2.isNaN) {
-  print("El resultado de la ecuacion introducida es $r1");
-} else if (r1 == r2) {
-  print("El resultado de la ecuacion introducida es $r1");
-} else {
-  print("Los resulados de la ecuacion introducida son $r2 y $r1");
-}
+  // Interpretamos los resultados de la ecuacion y los mostramos
+  if (r1.isNaN && r2.isNaN) {
+    print("No existen relaciones reales a la ecuacion");
+  } else if (r1.isNaN) {
+    print("El resultado de la ecuacion introducida es $r2");
+  } else if (r2.isNaN) {
+    print("El resultado de la ecuacion introducida es $r1");
+  } else if (r1 == r2) {
+    print("El resultado de la ecuacion introducida es $r1");
+  } else {
+    print("Los resulados de la ecuacion introducida son $r2 y $r1");
+  }
 }
