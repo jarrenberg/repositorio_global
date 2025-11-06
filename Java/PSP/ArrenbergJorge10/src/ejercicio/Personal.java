@@ -3,6 +3,9 @@ package ejercicio;
 import java.util.Objects;
 
 public class Personal extends Thread {
+
+	private static boolean jefeAqui = false;
+
 	private final String nombre;
 	private Saludo saludo;
 	private boolean esJefe;
@@ -13,30 +16,33 @@ public class Personal extends Thread {
 		this.esJefe = esJefe;
 	}
 
-	@Override
-	public synchronized void run() {
+	public void saludoEmpleado(String nombre) throws InterruptedException {
 		synchronized (saludo) {
-			if (!this.esJefe) {
-				try {
-					this.wait();
-				} catch (InterruptedException e) {
-					System.out.println(e.toString());
-				}
-				System.out.printf("%s: SALUDOS JEFE\n", this.nombre);
-				try {
-					Thread.sleep(100);
-				} catch (InterruptedException e) {
-					System.out.println(e.toString());
-				}
-			} else {
-				System.out.printf("*** %s: SALUDOS EMPLEADOS ***\n", this.nombre);
-				try {
-					this.notifyAll();
-					Thread.sleep(100);
-				} catch (InterruptedException e) {
-					System.out.println(e.toString());
-				}
+			while (!jefeAqui) {
+				saludo.wait();
 			}
+			System.out.printf("%s: Buenos dias jefe\n", nombre);
+		}
+	}
+
+	public void saludoJefe(String nombre) {
+		synchronized (saludo) {
+			System.out.printf("*** %s: Buenos dias empleados ***\n", nombre);
+			saludo.notifyAll();
+			jefeAqui = true;
+		}
+	}
+
+	@Override
+	public void run() {
+		if (!this.esJefe) {
+			try {
+				saludoEmpleado(nombre);
+			} catch (InterruptedException e) {
+				System.out.println(e.toString());
+			}
+		} else {
+			saludoJefe(nombre);
 		}
 	}
 
@@ -76,5 +82,4 @@ public class Personal extends Thread {
 		Personal other = (Personal) obj;
 		return Objects.equals(nombre, other.nombre);
 	}
-
 }
