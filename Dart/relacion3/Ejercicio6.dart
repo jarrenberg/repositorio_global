@@ -15,18 +15,17 @@ void main(List<String> args) {
 
   print("Cadena de texto original: ${cadena}");
   print("Cadena de texto reversa: ${cadenaReversa}");
-  if(esPalindromo(cadena)){
+  if (esPalindromo(cadena)) {
     print("Las cadenas de texto son palindromas");
-  }else{
+  } else {
     print("Las cadenas de texto no son palindromas");
   }
 }
 
-bool esPalindromo(String cadena){
-  bool palindromo=false;
-  if(cadena.trim()==""){
-    palindromo=true;
+bool esPalindromo(String cadena) {
+  bool palindromo = false;
+  if (cadena.trim() == "") {
+    palindromo = true;
   }
   return palindromo;
 }
-

@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_function_declarations_over_variables, avoid_function_literals_in_foreach_calls
-
 /*20- Investiga qué son las funciones sin nombre y como se declaran y utilizan en Dart. Haz
 un programa que pruebe cada uno de los siguientes tipos:
 1. Función sin nombre asignada a una variable:

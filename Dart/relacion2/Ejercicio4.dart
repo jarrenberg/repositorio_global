@@ -10,7 +10,7 @@ String nombreApellidos(String nombre, String? apellidos) {
   if (apellidos == null) {
     resultado = nombre + " {apellidos desconocidos}";
   } else {
-    resultado = nombre + " " + apellidos;
+    resultado = nombre + " " + apellidos!;
   }
   return resultado;
 }
