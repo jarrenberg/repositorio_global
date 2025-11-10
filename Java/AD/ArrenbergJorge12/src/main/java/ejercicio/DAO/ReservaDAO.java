@@ -60,8 +60,8 @@ public class ReservaDAO {
 		boolean insertado = false;
 		String[] credenciales = UtilidadesSQL.credencialesConexionSQL();
 		try (Connection con = DriverManager.getConnection(credenciales[0], credenciales[1], credenciales[2]);
-				PreparedStatement ps1 = con.prepareStatement("DELETE from reservas where ")) {
-			
+				PreparedStatement ps1 = con.prepareStatement("UPDATE reservas set estado=? where numero_reserva=? and ")) {
+
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		} catch (Exception e) {
