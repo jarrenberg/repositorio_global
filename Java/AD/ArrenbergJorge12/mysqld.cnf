@@ -1,0 +1,5 @@
+server=192.168.10.111
+port=3306
+nombrebd=viajesbus
+user=jorge
+password=Peluca79
