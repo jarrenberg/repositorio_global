@@ -8,5 +8,16 @@ import { RouterOutlet } from '@angular/router';
 })
 export class App {
   protected readonly title = signal('Mi primera app de Angular');
-  titleAlter = 'Primera APP de Angular';
+  titleAlter = 'Contador de Jorge Arrenberg';
+  public contador = 0;
+  incrementar(): void {
+    this.contador = this.contador + 1;
+  }
+  decrementar(): void {
+    this.contador = this.contador - 1;
+  }
+  resetear(): void {
+    this.contador = 0;
+  }
+
 }
