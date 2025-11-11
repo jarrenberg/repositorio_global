@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Objects;
 
+//APARTADO 3
 public class Reserva {
 	private Integer numeroReserva;
 	private Integer codigoViaje;
@@ -15,29 +16,41 @@ public class Reserva {
 	private Integer plazasReservadas;
 	private String estado;
 
-	public Reserva(Integer codigoViaje, Integer codigoCliente, Integer plazasReservadas) {
+	public Reserva(Integer codigoViaje, Integer codigoCliente, Integer plazasReservadas)
+			throws IllegalArgumentException {
 		ArrayList<Integer> listaCodigosViaje = Reserva.listaCodigosViaje();
 		ArrayList<Integer> listaCodigosCliente = Reserva.listaCodigosCliente();
-		boolean invalido = false;
+		boolean invalidoCodigoCliente = true;
+		boolean invalidoCodigoViaje = true;
+		
+		// APARTADO 10
 		for (Integer entero : listaCodigosViaje) {
 			if (entero.equals(codigoViaje)) {
-				invalido = true;
+				invalidoCodigoViaje = false;
 			}
 		}
 		for (Integer entero : listaCodigosCliente) {
 			if (entero.equals(codigoCliente)) {
-				invalido = true;
+				invalidoCodigoCliente = false;
 			}
 		}
-		if (invalido) {
-			throw new IllegalArgumentException("No se puede crear dicha reserva");
-		} else {
-			this.numeroReserva = null;
-			this.codigoViaje = codigoViaje;
-			this.codigoCliente = codigoCliente;
-			this.plazasReservadas = plazasReservadas;
-			this.estado = null;
+		if (invalidoCodigoCliente) {
+			throw new IllegalArgumentException(
+					"No se puede crear una reserva con el codigo de cliente: " + codigoCliente);
 		}
+		if (invalidoCodigoViaje) {
+			throw new IllegalArgumentException("No se puede crear una reserva con el codigo de viaje: " + codigoViaje);
+		}
+		if (plazasReservadas < 1) {
+			throw new IllegalArgumentException(
+					"No se puede crear una reserva con un numero menor a 1 de plazas reservadass");
+		}
+		// FIN APARTADO 10
+		this.numeroReserva = null;
+		this.codigoViaje = codigoViaje;
+		this.codigoCliente = codigoCliente;
+		this.plazasReservadas = plazasReservadas;
+		this.estado = null;
 	}
 
 	private static ArrayList<Integer> listaCodigosViaje() {

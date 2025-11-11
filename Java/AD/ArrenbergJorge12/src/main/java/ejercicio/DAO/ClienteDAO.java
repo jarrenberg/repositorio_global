@@ -10,6 +10,7 @@ import java.sql.Types;
 import ejercicio.Cliente;
 import ejercicio.UtilidadesSQL;
 
+//APARTADO 4
 public class ClienteDAO {
 
 	public static Cliente getCliente(Integer codigo) throws NullPointerException {
@@ -85,6 +86,7 @@ public class ClienteDAO {
 			if (rs > 0) {
 				eliminado = true;
 			}
+			c = null;
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		} catch (Exception e) {

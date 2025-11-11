@@ -2,6 +2,7 @@ package ejercicio;
 
 import java.util.Objects;
 
+//APARTADO 3
 public class Cliente {
 
 	private Integer codigoCliente;

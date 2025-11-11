@@ -10,6 +10,7 @@ import java.sql.Types;
 import ejercicio.UtilidadesSQL;
 import ejercicio.Viaje;
 
+//APARTADO 4
 public class ViajeDAO {
 
 	public static Viaje getViaje(Integer codigoViaje) throws NullPointerException {
@@ -34,6 +35,28 @@ public class ViajeDAO {
 		}
 		return v;
 	}
+	
+	//APARTADO 6
+	
+	public static int plazasLibres(String destino) {
+		String[] credenciales = UtilidadesSQL.credencialesConexionSQL();
+		int plazasLibres = -1;
+		try (Connection con = DriverManager.getConnection(credenciales[0], credenciales[1], credenciales[2]);
+				PreparedStatement ps = con
+						.prepareStatement("SELECT plazas_disponibles from viajes where destino = ?")) {
+
+			ps.setString(1, destino);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				plazasLibres = rs.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return plazasLibres;
+	}
+
 
 	public static boolean insertarViaje(Viaje v) {
 		boolean insertado = false;
@@ -82,6 +105,7 @@ public class ViajeDAO {
 			if (rs > 0) {
 				eliminado = true;
 			}
+			v = null;
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		} catch (Exception ex) {
