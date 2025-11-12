@@ -1,18 +1,23 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-heroe',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './heroe.html',
   styleUrl: './heroe.css',
   standalone: true
 })
 export class HeroeComponent {
   private edad: number = 15;
-  private nombre: string = "Son goku";
+  private nombre: string = "Son Goku";
 
   public get getNombreCapitalizado(): string {
     return this.nombre.toUpperCase();
+  }
+
+  public get getNombre():string{
+    return this.nombre;
   }
 
   public get getEdad():number{
@@ -24,9 +29,14 @@ export class HeroeComponent {
   }
 
   public cambiarEdad():void{
-    this.edad+=1;
+    this.edad=50;
   }
   public cambiarNombre():void{
-    this.nombre=`${this.getNombreCapitalizado} ${this.getEdad}`;
+    this.nombre="Vegeta";
+  }
+
+  public restablecer(){
+    this.nombre="Son Goku";
+    this.edad=15;
   }
 }

@@ -1,12 +1,15 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeroeComponent } from "./heroes/heroe/heroe";
+import { CommonModule } from '@angular/common';
+import { ListaComponent } from './heroes/lista/lista';
 
 @Component({
+  standalone: true,
   selector: 'app-root',
   templateUrl: './app.html',
-  styleUrl: './app.css',
-  imports: [HeroeComponent]
+  styleUrls: ['./app.css'],
+  imports: [HeroeComponent,ListaComponent]
 })
 export class App {
   protected readonly title = signal('Mi primera app de Angular');

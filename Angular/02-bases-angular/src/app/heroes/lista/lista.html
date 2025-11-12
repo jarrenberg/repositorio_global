@@ -1,1 +1,21 @@
-<p>lista works!</p>
+@if (nombreHeroes.length!==0) {
+<h2>Lista HEROES</h2>
+<ul class="mt-2 list-group">
+  <!-- FORMA DE HACERLO CON NGFOR (DEPRECATED)
+  <li *ngFor="let nombre of nombreHeroes" class="list-group-item">{{nombre}}</li>-->
+  @for (nombreDB of nombreHeroes; track $index) {
+  <li class="list-group-item">{{nombreDB}}</li>
+  }
+</ul>
+<div style="margin: 10px;">
+  <button class="btn btn-dark" (click)="eliminarUltimoHeroe()">Eliminar al ultimo heroe</button>
+</div>
+}
+
+@if (nombreHeroesEliminados.length!==0) {
+<h2>Heroes Eliminados</h2>
+<ul class="mt-2 list-group">
+  @for (nombreDB of nombreHeroesEliminados; track $index) {
+  <li class="list-group-item">{{nombreDB}}</li>
+  }
+</ul>}

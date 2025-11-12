@@ -10,7 +10,7 @@ export class Instituto {
   private centro: string = "IES Playamar"
   private localidad: string = "Torremolinos"
   private familiasProfesionales: string[] = ["Informática y Comunicaciones", "Transporte", "Mantenimiento de Vehículos"]
-  private linkImagen: string = "https://iesplayamar.es/wp-content/uploads/2021/09/logo-ies-playamar.png"
+  private linkImagen: string = "playamar.png"
 
   public get getCentro() {
     return this.centro;
@@ -37,13 +37,13 @@ export class Instituto {
       this.centro = "IES Jacaranda";
       this.familiasProfesionales = ["Hosteleria", "Turismo"];
       this.localidad = "Churriana";
-      this.linkImagen = "https://pbs.twimg.com/profile_images/3059231666/21dd362313c922734bf3297b69b2da14.jpeg";
+      this.linkImagen = "jacaranda.jpeg";
 
     } else {
       this.centro = "IES Playamar";
       this.familiasProfesionales = ["Informática y Comunicaciones", "Transporte", "Mantenimiento de Vehículos"];
       this.localidad = "Torremolinos";
-      this.linkImagen = "https://iesplayamar.es/wp-content/uploads/2021/09/logo-ies-playamar.png";
+      this.linkImagen = "playamar.png";
     }
   }
 }
