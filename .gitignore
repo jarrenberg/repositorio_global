@@ -1,2 +1,3 @@
 # Ignorar carpeta Flutter
 Flutter/
+.vscode/**
