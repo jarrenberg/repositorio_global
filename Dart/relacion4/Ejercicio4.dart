@@ -23,6 +23,18 @@ class Punto {
     _z = (_z + distancia);
   }
 
+  double getX() {
+    return _x;
+  }
+
+  double getY() {
+    return _y;
+  }
+
+  double getZ() {
+    return _z;
+  }
+
   @override
   String toString() {
     return "(${_x}, ${_y}, ${_z})";
