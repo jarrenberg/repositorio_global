@@ -8,9 +8,9 @@ un programa que pruebe cada uno de los siguientes tipos:
 void main(List<String> arguments) {
   //1. Funcion sin nombre asignada a una variable
   print("1. Funcion sin nombre asignada a una variable");
-  var muestraNumero = (int numero) {
+  void muestraNumero(int numero) {
     print("Mostrando el numero $numero");
-  };
+  }
   muestraNumero(5);
 
   // 2. Función sin nombre dentro de una función de orden superior (como forEach)
@@ -24,10 +24,10 @@ void main(List<String> arguments) {
   diasSemana.add("Jueves");
   diasSemana.add("Viernes");
 
-  diasSemana.forEach((dia) {
+  for (var dia in diasSemana) {
     String diaLower = dia.toLowerCase();
     print("Dia de la semana: $diaLower");
-  });
+  }
 
   // 3. Función con la sintaxis de flecha (=>) para funciones de una sola línea
   print(
@@ -35,11 +35,11 @@ void main(List<String> arguments) {
   );
   List diasSemanaOrdenados = List.of(diasSemana);
   diasSemanaOrdenados.sort();
-  diasSemanaOrdenados.forEach(
-    (dia) => print(
+  for (var dia in diasSemanaOrdenados) {
+    print(
       "Dia ${((diasSemanaOrdenados.indexOf(dia)) + 1)} de la semana ordenada por nombre del dia: $dia",
-    ),
-  );
+    );
+  }
 
   // 4. Función como argumento de otra función
   print("\n4. Función como argumento de otra función");

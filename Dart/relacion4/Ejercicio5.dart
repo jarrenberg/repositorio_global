@@ -6,7 +6,6 @@ sus puntos)
 ● debe poderse sumar con otro vector
 ● debe poderse calcular el producto vectorial (solo si tienes formación matemática)*/
 
-import 'dart:math';
 
 import 'Ejercicio4.dart';
 

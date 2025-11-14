@@ -97,10 +97,8 @@ public class ViajeDAO {
 		String[] credenciales = UtilidadesSQL.credencialesConexionSQL();
 		try (Connection con = DriverManager.getConnection(credenciales[0], credenciales[1], credenciales[2]);
 				PreparedStatement ps1 = con
-						.prepareStatement("DELETE from viajes where destino=? and plazas_disponibles=? and codigo=?")) {
-			ps1.setString(1, v.getDestino());
-			ps1.setInt(2, v.getPlazasDisponibles());
-			ps1.setInt(3, v.getCodigo());
+						.prepareStatement("DELETE from viajes where codigo=?")) {
+			ps1.setInt(1, v.getCodigo());
 			int rs = ps1.executeUpdate();
 			if (rs > 0) {
 				eliminado = true;

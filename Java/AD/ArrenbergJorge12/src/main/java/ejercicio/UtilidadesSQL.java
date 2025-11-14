@@ -68,7 +68,9 @@ public class UtilidadesSQL {
 				System.out.println(e.getMessage());
 			} catch (IllegalStateException e) {
 				System.out.println(e.getMessage());
-			}
+			} catch (NumberFormatException e) {
+	            System.out.println("Error: Se debe introducir un número entero válido");
+	        }
 		} while (!valido);
 		sc.nextLine();
 		return resultado;
