@@ -22,7 +22,7 @@ public class Reserva {
 		ArrayList<Integer> listaCodigosCliente = Reserva.listaCodigosCliente();
 		boolean invalidoCodigoCliente = true;
 		boolean invalidoCodigoViaje = true;
-		
+
 		// APARTADO 10
 		for (Integer entero : listaCodigosViaje) {
 			if (entero.equals(codigoViaje)) {
@@ -100,7 +100,18 @@ public class Reserva {
 	}
 
 	public void setCodigoViaje(Integer codigoViaje) {
-		this.codigoViaje = codigoViaje;
+		boolean existe = false;
+		ArrayList<Integer> listaCodigosViaje = listaCodigosViaje();
+		for (Integer i : listaCodigosViaje) {
+			if (i.equals(codigoViaje)) {
+				existe = true;
+			}
+		}
+		if (existe) {
+			this.codigoViaje = codigoViaje;
+		} else {
+			throw new IllegalArgumentException("No existe el viaje con el codigo: " + codigoViaje);
+		}
 	}
 
 	public Integer getCodigoCliente() {
@@ -108,7 +119,18 @@ public class Reserva {
 	}
 
 	public void setCodigoCliente(Integer codigoCliente) {
-		this.codigoCliente = codigoCliente;
+		boolean existe = false;
+		ArrayList<Integer> listaCodigosCliente = listaCodigosCliente();
+		for (Integer i : listaCodigosCliente) {
+			if (i.equals(codigoCliente)) {
+				existe = true;
+			}
+		}
+		if (existe) {
+			this.codigoCliente = codigoCliente;
+		} else {
+			throw new IllegalArgumentException("No existe el cliente con el codigo: " + codigoCliente);
+		}
 	}
 
 	public Integer getPlazasReservadas() {

@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import ejercicio.DAO.ClienteDAO;
+import ejercicio.DAO.ReservaDAO;
 import ejercicio.DAO.ViajeDAO;
 
 public class Main {
@@ -113,10 +114,53 @@ public class Main {
 				}
 				break;
 			case 7:
+				int codigoViaje = UtilidadesSQL.devolverEntero(sc,
+						"Introduzca el codigo del viaje que le gustaria reservar: ");
+				int codigoCliente = UtilidadesSQL.devolverEntero(sc,
+						"Introduzca el codigo del cliente que reserva el viaje: ");
+				int plazasReservadas = UtilidadesSQL.devolverEntero(sc,
+						"Introduzca el numero de plazas que quiere reservar: ");
+				Reserva r = null;
+				try {
+					r = new Reserva(codigoViaje, codigoCliente, plazasReservadas);
+					if (ReservaDAO.insertarReserva(r)) {
+						System.out.println("Se ha insertado la reserva correctamente");
+					} else {
+						System.out.println("No se ha podido insertar la reserva");
+					}
+
+				} catch (IllegalArgumentException ex) {
+					System.out.println(ex.toString());
+				}
 				break;
 			case 8:
+				codigo = UtilidadesSQL.devolverEntero(sc,
+						"Introduzca el codigo de la reserva que le gustaria modificar: ");
+				r = ReservaDAO.getReserva(codigo);
+				codigoViaje = UtilidadesSQL.devolverEntero(sc,
+						"Introduzca el nuevo codigo del viaje que le gustaria reservar: ");
+				codigoCliente = UtilidadesSQL.devolverEntero(sc,
+						"Introduzca el nuevo codigo del cliente que reserva el viaje: ");
+				plazasReservadas = UtilidadesSQL.devolverEntero(sc,
+						"Introduzca el nuevo numero de plazas que quiere reservar: ");
+				r.setCodigoViaje(codigoViaje);
+				r.setCodigoCliente(codigoCliente);
+				r.setPlazasReservadas(plazasReservadas);
+				if (ReservaDAO.actualizarReserva(r)) {
+					System.out.println("Se ha actualizado la reserva");
+				} else {
+					System.out.println("No se ha podido actualizar la reserva");
+				}
 				break;
 			case 9:
+				codigo = UtilidadesSQL.devolverEntero(sc,
+						"Introduzca el codigo de la reserva que le gustaria eliminar: ");
+				r = ReservaDAO.getReserva(codigo);
+				if (ReservaDAO.cancelarReserva(r)) {
+					System.out.println("Se ha cancelado la reserva");
+				} else {
+					System.out.println("No se ha podido cancelar la reserva");
+				}
 				break;
 			case 10:
 				salir = true;
