@@ -1,12 +1,10 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-heroe',
-  imports: [CommonModule],
   templateUrl: './heroe.html',
   styleUrl: './heroe.css',
-  standalone: true
+  standalone: false
 })
 export class HeroeComponent {
   private edad: number = 15;

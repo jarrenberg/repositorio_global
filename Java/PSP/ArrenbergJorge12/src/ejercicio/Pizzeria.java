@@ -13,11 +13,8 @@ public class Pizzeria {
 		System.out.println("ENTRA EL COCINERO ...");
 
 		for (int i = 0; i < 10; i++) {
-			String nombre = devolverString(sc, "Introduzca el nombre del cliente: ");
-			String masa = devolverString(sc, "Introduzca la masa: ");
-			String salsa = devolverString(sc, "Introduzca la salsa: ");
-			String topping = devolverString(sc, "Introduzca el topping: ");
-			Pizza p = new Pizza(masa, salsa, topping);
+			String nombre = String.format("%d", i);
+			Pizza p = new Pizza();
 			Cliente cl = new Cliente(nombre, p);
 			Cocinero c = new Cocinero("Juan", p);
 			System.out.println("METIENDO LA COMANDA EN COCINA ...");
