@@ -1,16 +1,18 @@
-/*12- Revisita la clase Fracción y crea una clase derivada FraccionComparable que incluya
-los métodos booleanos que calculen:
-● esMayorQue
-● esMenosQue
-● esIgualA
-● esMayorOIgualQue
-● esMenorOIgualQue
-● esDistintoQue */
-
-
+/*13- Crea un mixin en Dart llamado Comparable<T> . A partir de un tipo T, deberá crear una
+interfaz que incluya los métodos anteriores. ¿Podría usarse en el caso anterior?*/
 import 'dart:core';
 
-class Fraccion {
+mixin Comparable<T> {
+  bool esMayorQue(T otro);
+  bool esMenosQue(T otro);
+  bool esIgualA(T otro);
+  
+  bool esMayorOIgualQue(T otro) => esMayorQue(otro) || esIgualA(otro);
+  bool esMenorOIgualQue(T otro) => esMenosQue(otro) || esIgualA(otro);
+  bool esDistintoQue(T otro) => !esIgualA(otro);
+}
+
+class Fraccion with Comparable<Fraccion> {
   late int numerador;
   late int denominador;
 
@@ -19,11 +21,12 @@ class Fraccion {
     if (denominador == 0) {
       throw Exception(
         "El denominado no puede ser 0",
-      ); // lanzamos una excepcion si el denominador es 0
+      );
     }
     this.numerador = numerador;
     this.denominador = denominador;
   }
+
   // Metodo que devuelve el numerador
   int getNumerador() {
     return numerador;
@@ -49,64 +52,24 @@ class Fraccion {
     }
   }
 
-// Metodo que devuelve si una fracion en mayor que la pasada por parametro
+  @override
   bool esMayorQue(Fraccion f) {
-    bool mayor = false;
-    if ((this.numerador / this.denominador) >
-        f.getNumerador() / f.getDenominador()) {
-      mayor = true;
-    }
-    return mayor;
-  }
-// Metodo que devuelve si una fracion en menor que la pasada por parametro
-  bool esMenosQue(Fraccion f) {
-    bool resultado = true;
-    if ((this.numerador / this.denominador) >
-        f.getNumerador() / f.getDenominador()) {
-      resultado = false;
-    }
-    return resultado;
+    return (this.numerador / this.denominador) > 
+           (f.getNumerador() / f.getDenominador());
   }
 
-// Metodo que devuelve si una fracion es igual que la pasada por parametro
+  @override
+  bool esMenosQue(Fraccion f) {
+    return (this.numerador / this.denominador) < 
+           (f.getNumerador() / f.getDenominador());
+  }
+
+  @override
   bool esIgualA(Fraccion f) {
-    bool resultado = false;
     this.simplificar();
     f.simplificar();
-    if ((this.getDenominador() == f.getDenominador()) &&
-        (this.getNumerador() == f.getNumerador())) {
-      resultado = true;
-    }
-    return resultado;
-  }
-
-// Metodo que devuelve si una fracion es mayor o igual que la pasada por parametro
-  bool esMayorOIgualQue(Fraccion f) {
-    bool resultado = false;
-    if ((this.numerador / this.denominador) >=
-        f.getNumerador() / f.getDenominador()) {
-      resultado = true;
-    }
-    return resultado;
-  }
-
-// Metodo que devuelve si una fracion es menor o igual que la pasada por parametro
-  bool esMenorOIgualQue(Fraccion f) {
-    bool resultado = true;
-    if ((this.numerador / this.denominador) >=
-        f.getNumerador() / f.getDenominador()) {
-      resultado = false;
-    }
-    return resultado;
-  }
-
-// Metodo que devuelve si una fracion es distinto que la pasada por parametro
-  bool esDistintoQue(Fraccion f) {
-    bool resultado = false;
-    if (!this.esIgualA(f)) {
-      resultado = true;
-    }
-    return resultado;
+    return (this.getDenominador() == f.getDenominador()) &&
+           (this.getNumerador() == f.getNumerador());
   }
 
   // Metodo que muestra la informacion de un objeto Fraccion
@@ -117,9 +80,10 @@ class Fraccion {
 }
 
 void main(List<String> args) {
-  Fraccion f = new Fraccion(5, 7);
-  Fraccion g = new Fraccion(48, 54);
+  Fraccion f = Fraccion(5, 7);
+  Fraccion g = Fraccion(48, 54);
 
+  // Pruebas de los métodos del mixin
   if (f.esMayorQue(g)) {
     print("${f.toString()} es mayor que ${g.toString()}");
   } else {
