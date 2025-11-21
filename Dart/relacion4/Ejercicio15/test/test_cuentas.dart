@@ -31,11 +31,6 @@ class CuentaBancariaMock implements CuentaBancaria {
 }
 
 void main() {
-  group('Pruebas de CuentaBancaria (Interfaz)', () {
-    test('CuentaBancaria es abstracta y no puede instanciarse', () {
-      expect(() => CuentaBancaria(), throwsA(isA<Error>()));
-    });
-  });
 
   group('Pruebas de CuentaCredito', () {
     test('Constructor inicializa correctamente', () {
@@ -301,7 +296,4 @@ void main() {
       expect(() => cuenta.extraer(0.01), throwsA(isA<Exception>()));
     });
   });
-}
-
-void expect(double saldo, Matcher equals) {
 }

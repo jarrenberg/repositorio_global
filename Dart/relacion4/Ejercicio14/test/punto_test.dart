@@ -133,7 +133,7 @@ import 'package:test/test.dart';
       final resultado = punto.toString();
       
       // Assert
-      expect(resultado as double, equals("(1.5, 2.7, 3.9)"));
+      expect(resultado , equals("(1.5, 2.7, 3.9)"));
     });
 
     test('Coordenadas con valores decimales', () {
