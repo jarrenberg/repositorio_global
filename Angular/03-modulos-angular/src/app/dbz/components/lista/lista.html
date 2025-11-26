@@ -1,0 +1,16 @@
+<h1>Lista</h1>
+<ul class="list-group">
+  @for (personaje of listaPersonajes; track $index;let i = $index;let esUltimo = $last;let esPar=$even;let esPrimero=$first) {
+  <li class="list-group-item" [ngClass]="{
+    'list-group-item-primary':esPrimero,
+    'list-group-item-secondary':esPar && esPrimero==false,
+    'list-group-item-danger':esUltimo
+  }">
+    <span>{{personaje.nombre}} - </span>
+    <strong>Fuerza: </strong>
+    <span>{{personaje.fuerza}}</span>
+    <br>
+    <span>Indice: {{i}} - Es par: {{esPar}} - Es ultimo: {{esUltimo}}</span>
+  </li>
+  }
+</ul>

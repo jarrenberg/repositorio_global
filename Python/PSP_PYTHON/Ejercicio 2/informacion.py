@@ -17,7 +17,7 @@ def  getIp(filename:str)->str:
     return resultado
 
 @staticmethod
-def  getPuerto(filename:str):
+def  getPuerto(filename:str)->int:
     resultado=""
     if os.path.exists(filename) is True:
         file=open(file=filename,mode='r')
@@ -29,4 +29,4 @@ def  getPuerto(filename:str):
                 parametros=line.split("=")
                 c=parametros[1].split("\n")
                 resultado=c[0]
-    return resultado
+    return int(resultado)

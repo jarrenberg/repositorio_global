@@ -1,0 +1,25 @@
+import random
+
+
+@staticmethod
+def qotd() -> str:
+    lista_frases = [
+        "El único modo de hacer un gran trabajo es amar lo que haces. - Steve Jobs",
+        "La vida es lo que pasa mientras estás ocupado haciendo otros planes. - John Lennon",
+        "No cuentes los días, haz que los días cuenten. - Muhammad Ali",
+        "El éxito es ir de fracaso en fracaso sin perder el entusiasmo. - Winston Churchill",
+        "La mejor venganza es un éxito masivo. - Frank Sinatra",
+        "No sueñes tu vida, vive tu sueño. - Anónimo",
+        "La única forma de hacer algo excelente es amar lo que haces. - Steve Jobs",
+        "El futuro pertenece a quienes creen en la belleza de sus sueños. - Eleanor Roosevelt",
+        "La vida es 10% lo que me pasa y 90% cómo reacciono a ello. - Charles R. Swindoll",
+        "El hombre que mueve montañas comienza llevando pequeñas piedras. - Confucio",
+        "La oportunidad no llama a la puerta, la creas tú mismo. - Chris Grosser",
+        "El único límite para nuestros logros de mañana está en nuestras dudas de hoy. - Franklin D. Roosevelt",
+        "No te preocupes por los fracasos, preocúpate por las oportunidades que pierdes cuando ni siquiera lo intentas. - Jack Canfield",
+        "La mejor manera de predecir el futuro es creándolo. - Peter Drucker",
+        "El secreto para salir adelante es comenzar. - Mark Twain"
+    ]
+    pos = random.randint(0, (len(lista_frases) - 1))
+
+    return lista_frases[pos]

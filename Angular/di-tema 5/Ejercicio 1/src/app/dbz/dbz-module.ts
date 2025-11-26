@@ -7,7 +7,7 @@ import { AddPersonaje } from './components/add-personaje/add-personaje';
 
 @NgModule({
   declarations: [MainPageComponent,ListaDBZ,AddPersonaje],
-  exports:[MainPageComponent,ListaDBZ,AddPersonaje],
+  exports:[MainPageComponent],
   imports: [
     CommonModule
   ]
