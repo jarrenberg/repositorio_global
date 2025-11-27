@@ -1,9 +1,9 @@
 from Vehiculo import Vehiculo
 
 class Coche(Vehiculo):
-    __consumo:5
+    __consumo=5
     
-    def __init__(self, modelo:str, anyo:float):
+    def __init__(self, modelo:str, anyo:int):
         super().__init__(modelo, anyo, self.__consumo)
         
         

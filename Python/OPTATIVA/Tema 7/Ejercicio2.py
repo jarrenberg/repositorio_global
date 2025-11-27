@@ -76,7 +76,7 @@ def modificarContacto(nombreContacto:str,agenda:dict)->bool:
             modificado=True
     return modificado
 
-def buscarPorNumeroDeTelefono(telefono:str,agenda:dict)->str:
+def buscarPorNumeroDeTelefono(telefono:str,agenda:dict)->str|None:
     resultado=None
     for key,value in agenda.items():
         if value.telefono == telefono:

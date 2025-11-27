@@ -18,3 +18,6 @@ class Vehiculo(ABC):
         
     def __str__(self):
         return f"Tipo: {self.__class__.__name__}\t\tModelo: {self.modelo}\tAño: {self.anyo}\tConsumo cada 100KM: {self.consumo_cada_100km}"
+    
+    def calcular_consumo(self,kilometros:float)->float:
+        return 0
