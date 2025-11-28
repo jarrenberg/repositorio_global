@@ -1,68 +1,117 @@
 package hibernate.entity;
 
+import java.util.Objects;
+
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "persona")
+@Table(name = "agenda")
 public class Persona {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "codigo")
+	private int codigo;
 
-    @Column(name = "first_name")
-    private String firstName;
+	@Column(name = "nombre")
+	private String nombre;
 
-    @Column(name = "last_name")
-    private String lastName;
+	@Column(name = "direccion")
+	private String direccion;
 
-    @Column(name = "email")
-    private String email;
+	@Column(name = "email")
+	private String email;
 
-    public Persona() {
-    }
+	@Column(name = "telefono")
+	private String telefono;
 
-    public Persona(String firstName, String lastName, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-    }
+	@Column(name = "altura")
+	private int altura;
 
-    public int getId() {
-        return id;
-    }
+	public Persona(String nombre, String direccion, String email, String telefono, int altura) {
+		super();
+		this.nombre = nombre;
+		this.direccion = direccion;
+		this.email = email;
+		this.telefono = telefono;
+		this.altura = altura;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public Persona() {
+		super();
+	}
 
-    public String getFirstName() {
-        return firstName;
-    }
+	public int getCodigo() {
+		return codigo;
+	}
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
+	}
 
-    public String getLastName() {
-        return lastName;
-    }
+	public String getNombre() {
+		return nombre;
+	}
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public String getDireccion() {
+		return direccion;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
 
-    @Override
-    public String toString() {
-        return "Student [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + "]";
-    }
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
+	public int getAltura() {
+		return altura;
+	}
+
+	public void setAltura(int altura) {
+		this.altura = altura;
+	}
+
+	@Override
+	public String toString() {
+		return "Persona [codigo=" + codigo + ", nombre=" + nombre + ", direccion=" + direccion + ", email=" + email
+				+ ", telefono=" + telefono + ", altura=" + altura + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(altura, codigo, direccion, email, nombre, telefono);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Persona other = (Persona) obj;
+		return altura == other.altura && codigo == other.codigo && Objects.equals(direccion, other.direccion)
+				&& Objects.equals(email, other.email) && Objects.equals(nombre, other.nombre)
+				&& Objects.equals(telefono, other.telefono);
+	}
+
 }

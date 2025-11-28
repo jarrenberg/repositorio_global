@@ -8,7 +8,7 @@ puerto =int(informacion.getPuerto('datos_server.txt'))
 
 socket_servidor=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-direccion_servidor = (ip,puerto)
+direccion_servidor: tuple[str, int] = (ip,puerto)
 socket_servidor.bind(direccion_servidor)
 
 socket_servidor.listen(1)

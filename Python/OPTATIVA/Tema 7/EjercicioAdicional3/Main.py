@@ -42,7 +42,7 @@ def main():
 
     for vehiculo in lista_vehiculos:
         print(
-            f"El consumo del vehiculo {vehiculo.modelo} es: {vehiculo.calcular_consumo(200):.2f}L")
+            f"El consumo del {vehiculo.__class__.__name__} {vehiculo.modelo} es: {vehiculo.calcular_consumo(200):.2f}L")
 
 
 main()
