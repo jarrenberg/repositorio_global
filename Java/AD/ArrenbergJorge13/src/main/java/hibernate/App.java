@@ -15,23 +15,7 @@ public class App {
 	public static void main(String[] args) {
 		menu();
 
-	}/*
-		 * Persona p1 = new Persona("Jorge", "C/Molona",
-		 * "jorge@email.com","123456789",187); Persona p2 = new Persona("Juan",
-		 * "C/Augusto", "juan@email.com","987654321",178); Transaction transaction =
-		 * null; try (Session session = HibernateUtil.getSessionFactory().openSession())
-		 * { // start a transaction transaction = session.beginTransaction(); // save
-		 * the student objects session.persist(p1); session.persist(p2); // commit
-		 * transaction transaction.commit(); } catch (Exception e) { if (transaction !=
-		 * null) { transaction.rollback(); } e.printStackTrace(); }
-		 * 
-		 * try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-		 * List<Persona> agenda = session.createQuery("from Persona",
-		 * Persona.class).list(); agenda.forEach(s -> System.out.println(s.toString()));
-		 * } catch (Exception e) { e.printStackTrace(); }
-		 * 
-		 * HibernateUtil.shutdown();
-		 */
+	}
 
 	public static void menu() {
 		try (Scanner sc = new Scanner(System.in)) {
@@ -72,18 +56,51 @@ public class App {
 					agenda.forEach(s -> System.out.println(s.toString()));
 					break;
 				case "c":
+					nombre = UtilidadesSQL.devolverString(sc, "Introduzca el nombre del contacto a modificar:");
+					telefono = UtilidadesSQL.devolverString(sc, "Introduzca el telefono del contacto a modificar:");
+					try {
+						boolean modificado = false;
+						for (Persona p : agenda) {
+							if (p.getNombre().equals(nombre) && p.getTelefono().equals(telefono)) {
+								String nuevoNombre = UtilidadesSQL.devolverString(sc, "Introduzca el nuevo nombre:");
+								String nuevaDireccion = UtilidadesSQL.devolverString(sc,
+										"Introduzca la nueva direccion:");
+								String nuevoEmail = UtilidadesSQL.devolverString(sc, "Introduzca el nuevo email:");
+								String nuevoTelefono = UtilidadesSQL.devolverString(sc,
+										"Introduzca el nuevo telefono:");
+								int nuevaAltura = UtilidadesSQL.devolverEntero(sc, "Introduzca la nueva altura:");
+
+								p.setNombre(nuevoNombre);
+								p.setDireccion(nuevaDireccion);
+								p.setEmail(nuevoEmail);
+								p.setTelefono(nuevoTelefono);
+								p.setAltura(nuevaAltura);
+
+								modificado = modificarPersona(p);
+							}
+						}
+						if (modificado) {
+							System.out.println("Se ha modificado a la persona en la agenda con exito!");
+						} else {
+							System.out.println("No se ha podido modificar a la persona en la agenda");
+						}
+					} catch (Exception ex) {
+						System.out.printf("Error: %s\n", ex.getMessage());
+					}
 
 					break;
 				case "d":
 					nombre = UtilidadesSQL.devolverString(sc, "Introduzca el nombre del contacto a eliminar:");
-					direccion = UtilidadesSQL.devolverString(sc, "Introduzca la direccion del contacto a eliminar:");
-					email = UtilidadesSQL.devolverString(sc, "Introduzca el email del contacto a eliminar:");
 					telefono = UtilidadesSQL.devolverString(sc, "Introduzca el telefono del contacto a eliminar:");
-					altura = UtilidadesSQL.devolverEntero(sc, "Introduzca la altura del contacto a eliminar:");
+
 					try {
-						Persona p = new Persona(nombre, direccion, email, telefono, altura);
-						boolean elimminado = eliminarPersona(p);
-						if (elimminado) {
+						boolean eliminado = false;
+						for (Persona p : agenda) {
+							if (p.getNombre().equals(nombre) && p.getTelefono().equals(telefono)) {
+								eliminado = eliminarPersona(p);
+							}
+						}
+						if (eliminado) {
 							System.out.println("Se ha eliminado a la persona en la agenda con exito!");
 						} else {
 							System.out.println("No se ha podido eliminado a la persona en la agenda");
@@ -107,11 +124,11 @@ public class App {
 		boolean insertado = false;
 		Transaction transaction = null;
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-			// start a transaction
+
 			transaction = session.beginTransaction();
-			// save the student objects
+
 			session.persist(p);
-			// commit transaction
+
 			transaction.commit();
 			insertado = true;
 		} catch (Exception e) {
@@ -134,22 +151,40 @@ public class App {
 	}
 
 	public static boolean eliminarPersona(Persona p) {
-	    boolean eliminado = false;
-	    Transaction transaction = null;
-	    try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-	        transaction = session.beginTransaction();
-	        
-	        // This handles both managed and detached entities
-	        session.remove(session.merge(p));
-	        
-	        transaction.commit();
-	        eliminado = true;
-	    } catch (Exception e) {
-	        if (transaction != null) {
-	            transaction.rollback();
-	        }
-	        e.printStackTrace();
-	    }
-	    return eliminado;
+		boolean eliminado = false;
+		Transaction transaction = null;
+		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+			transaction = session.beginTransaction();
+
+			session.remove(session.merge(p));
+
+			transaction.commit();
+			eliminado = true;
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			e.printStackTrace();
+		}
+		return eliminado;
+	}
+
+	public static boolean modificarPersona(Persona p) {
+		boolean modificado = false;
+		Transaction transaction = null;
+		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+			transaction = session.beginTransaction();
+
+			session.merge(p);
+
+			transaction.commit();
+			modificado = true;
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			e.printStackTrace();
+		}
+		return modificado;
 	}
 }

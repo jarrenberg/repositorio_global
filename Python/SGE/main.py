@@ -2,15 +2,25 @@ from fastapi import FastAPI, HTTPException
 
 from models import ItemPayload
 
+
 app = FastAPI()
+
+
+@app.get('/')
+def root() -> dict[str, str]:
+    return {"Hello": "World"}
+
 
 grocery_list: dict[int, ItemPayload] = {}
 
 # Route to add an item
+
+
 @app.post("/items/{item_name}/{quantity}")
 def add_item(item_name: str, quantity: int) -> dict[str, ItemPayload]:
     if quantity <= 0:
-        raise HTTPException(status_code=400, detail="Quantity must be greater than 0.")
+        raise HTTPException(
+            status_code=400, detail="Quantity must be greater than 0.")
     # if item already exists, we'll just add the quantity.
     # get all item names
     items_ids: dict[str, int] = {
