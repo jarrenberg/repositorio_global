@@ -17,14 +17,34 @@ export class AddPersonaje {
     fuerza: 0
   }
   public addPersonaje() {
+    debugger
+    //Forma antonio alumno
+    // let copy = Objetct.assing({}, this.personaje);
+
+    // Mi forma
+    /*
+    var nombreCopia=this.personaje.nombre
+    var fuerzaCopia=this.personaje.fuerza
+    const copia:Personaje={
+      nombre:nombreCopia,
+      fuerza:fuerzaCopia
+    }
+    console.log(copia)
+    if (copia.nombre === '' || copia.fuerza === 0) {
+      return
+    } else {
+      this.onNewPersonaje.emit(copia)
+    }*/
     console.log(this.personaje)
     if (this.personaje.nombre === '' || this.personaje.fuerza === 0) {
       return
     } else {
       this.onNewPersonaje.emit(this.personaje)
     }
-    this.personaje.nombre = ""
-    this.personaje.fuerza = 0
+    this.personaje = {
+      nombre: '',
+      fuerza: 0
+    }
 
   }
 }
