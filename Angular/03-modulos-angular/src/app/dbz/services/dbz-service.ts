@@ -65,13 +65,14 @@ export class DBZService {
   constructor() { }
     public personajes: Personaje[] = [p1, p2, p3, p4, p5, p6, p7, p8, p9, p10];
 
-  public onMetodoNewPersonaje(personaje: Personaje) {
-    const newPersonaje:Personaje={id:uuid(),...personaje}
+  public addPersonaje(personajeParam: Personaje) {
+    const newPersonaje:Personaje={id:uuid(),nombre:personajeParam.nombre,fuerza:personajeParam.fuerza}
     console.log(newPersonaje);
     this.personajes.push(newPersonaje)
   }
 
-  public onMetodoEliminarPersonaje(posicion:number){
-    this.personajes.splice(posicion,1)
+  public deletePersonajeById(id:string){
+    this.personajes=this.personajes.filter(personaje=>personaje.id!==id);
   }
+
 }

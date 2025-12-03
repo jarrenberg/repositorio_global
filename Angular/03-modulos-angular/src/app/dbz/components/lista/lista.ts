@@ -1,10 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Personaje } from '../../interfaces/personaje';
 
-const p1:Personaje={
-  nombre:"Bulma",
-  fuerza:10
-}
 
 @Component({
   selector: 'app-lista-dbz',
@@ -14,13 +10,13 @@ const p1:Personaje={
 })
 export class ListaDBZ {
   @Input()
-  public listaPersonajes:Personaje[]=[p1]
+  public listaPersonajes:Personaje[]=[]
 
   @Output()
-  public onDeletePersonaje: EventEmitter<number> = new EventEmitter();
+  public onDeletePersonaje: EventEmitter<string> = new EventEmitter();
 
-  public getPos(pos:number){
+  public getID(id:string){
 
-    this.onDeletePersonaje.emit(pos);
-  } 
+    this.onDeletePersonaje.emit(id);
+  }
 }

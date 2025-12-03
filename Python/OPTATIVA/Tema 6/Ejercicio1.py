@@ -86,7 +86,7 @@ def actualizarContacto(nombre:str,numero:str,agenda:dict)->bool:
         actualizado=True
     return actualizado
 
-def buscarContactoPorNumero(numero:str, agenda:dict)->str:
+def buscarContactoPorNumero(numero:str, agenda:dict)->str|None:
     resultado = None
     for key, value in agenda.items():
         if value == numero:

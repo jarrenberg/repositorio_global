@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DBZService } from '../../services/dbz-service';
+import { Personaje } from '../../interfaces/personaje';
 
 
 @Component({
@@ -10,5 +11,16 @@ import { DBZService } from '../../services/dbz-service';
 })
 
 export class MainPageComponent {
-  constructor(public DBZService: DBZService) { }
+  constructor(private DBZService: DBZService) { }
+   get personajes():Personaje[]{
+    return this.DBZService.personajes
+  }
+
+  public onDeletePersonaje(id:string){
+    this.DBZService.deletePersonajeById(id)
+  }
+
+  public onNewPersonaje(personaje:Personaje){
+    this.DBZService.addPersonaje(personaje)
+  }
 }
