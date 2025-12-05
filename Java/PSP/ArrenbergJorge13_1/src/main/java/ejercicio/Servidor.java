@@ -9,17 +9,20 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Servidor {
+public class Servidor extends Thread {
 	// Initialize socket and input stream
 	private Socket s = null;
 	private ServerSocket ss = null;
 	private String mensaje = "";
 	private DataOutputStream m = null;
+	private int port;
 
 	// Constructor with port
 	public Servidor(int port) {
+		this.port = port;
+	}
 
-		// Starts server and waits for a connection
+	public void run() {
 		try {
 			ss = new ServerSocket(port);
 			System.out.println("Server started");
@@ -41,9 +44,8 @@ public class Servidor {
 			s.close();
 			m.close();
 		} catch (IOException i) {
-			System.out.println(i.getMessage());
+			System.out.printf("Error en el server: %s\n", i.getMessage());
 		}
-
 	}
 
 	public static String getQOTD(File f) {
