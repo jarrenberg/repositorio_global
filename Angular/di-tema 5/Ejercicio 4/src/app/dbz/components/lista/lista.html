@@ -1,0 +1,24 @@
+<h1>Lista</h1>
+<ul class="list-group">
+  @for (personaje of listaPersonajes; track $index;let i = $index;let esUltimo = $last;let esPar=$even;let
+  esPrimero=$first) {
+  <li class="list-group-item d-flex justify-content-between align-items-center" [ngClass]="{
+    'list-group-item-primary':esPrimero,
+    'list-group-item-secondary':esPar && esPrimero==false,
+    'list-group-item-danger':esUltimo
+  }">
+
+    <div>
+      <span>{{personaje.nombre}} - </span>
+      <strong>Fuerza: </strong>
+      <span>{{personaje.fuerza}} </span>
+      <strong>ID: </strong>
+      <span>{{personaje.id}}</span>
+      <br>
+      <span>Indice: {{i}} - Es par: {{esPar}} - Es ultimo: {{esUltimo}}</span>
+    </div>
+    <button class="btn btn-danger" (click)="getPos(personaje.id)">X</button>
+
+  </li>
+  }
+</ul>

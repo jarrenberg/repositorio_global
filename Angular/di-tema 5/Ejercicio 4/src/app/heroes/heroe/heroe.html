@@ -1,0 +1,15 @@
+<h1>HEROE</h1>
+<h2>Nombre: {{getNombreCapitalizado}}</h2>
+<h2>Edad:{{getEdad}}</h2>
+<h1></h1>
+@if (getNombre==="Son Goku") {
+<button class="btn btn-primary" (click)="cambiarNombre()">Cambiar nombre</button>
+<h1></h1>
+}
+@if(getEdad===15){
+<button class="btn btn-primary" (click)="cambiarEdad()">Cambiar edad</button>
+<h1></h1>
+}
+<button class="btn btn-primary" (click)="restablecer()">Reestablecer valores</button>
+
+<h2>Informacion completa del heroe: {{getDescripcionHeroe()}} </h2>
